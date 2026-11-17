@@ -264,6 +264,23 @@ details.card summary::-webkit-details-marker{display:none}
 .tw{color:var(--eq);font-family:var(--display)}
 .kitem{display:flex;flex-direction:column;gap:3px;text-align:left;width:100%;border-radius:18px;padding:14px 16px;font:inherit;color:inherit;cursor:pointer;transition:transform .15s var(--ease)}
 .kitem .kt{font-weight:700}
+.wgsub{margin:4px 0 10px}.wgtop{display:flex;flex-direction:column;gap:4px;margin-bottom:10px}.wgph{font-weight:800;font-size:18px;color:var(--think)}.wgme{font-size:14px;line-height:1.7}
+.r-wolf{color:var(--warn)}.r-seer{color:var(--think)}.r-witch{color:var(--es)}.r-vill,.r-good{color:var(--eq)}
+.wgseats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.wgseat{display:flex;flex-direction:column;align-items:center;gap:2px;padding:10px 4px;border-radius:16px;border:1.5px solid var(--line);background:var(--solid);color:var(--ink);font:inherit;cursor:pointer;min-width:0;transition:transform .15s,border-color .15s,opacity .15s}
+.wgseat .wgno{font-weight:800;font-size:18px;line-height:1.1}.wgseat .wgnm{font-size:12px;color:var(--muted);max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.wgseat .wgtag{display:flex;flex-wrap:wrap;justify-content:center;gap:3px;min-height:18px;font-size:11px}.wgseat .wgtag i{font-style:normal;background:var(--think-soft);color:var(--think);border-radius:6px;padding:0 4px}
+.wgseat .mk{font-size:13px}.wgseat.me{border-color:var(--think);box-shadow:0 0 0 2px var(--think-soft)}.wgseat.dead{opacity:.42}.wgseat.dead .wgno{text-decoration:line-through}
+.wgseat.pick{border-color:var(--think);transform:translateY(-2px)}.wgseat.picked{background:var(--think);color:var(--on-acc)}.wgseat.picked .wgnm{color:var(--on-acc)}.wgseat:disabled{opacity:.3;cursor:default}
+.wgtip{text-align:center;margin:6px 0 10px}
+.wgfeed{max-height:46vh;overflow-y:auto;display:flex;flex-direction:column;gap:10px}
+.wgsay{display:flex;gap:10px;align-items:flex-start}.wgsay .wgav{flex:none;width:30px;height:30px;border-radius:50%;background:var(--think-soft);color:var(--think);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px}
+.wgsay b{font-size:13px}.wgsay p{margin:2px 0 0;line-height:1.6}.wgsay.mine .wgav{background:var(--think);color:var(--on-acc)}
+.wgsys{margin:2px 0;font-size:13px;color:var(--muted);text-align:center}.wgsys.vote{color:var(--ink);background:var(--think-soft);border-radius:10px;padding:6px 8px;text-align:left}.wgsys.priv{color:var(--think);font-weight:700}
+.wgold summary{font-size:13px;color:var(--muted);cursor:pointer}.wgold{border-bottom:1px dashed var(--line);padding-bottom:6px}
+.wgact .lbl{font-size:15px}.wgfake{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:6px 0}.mini.on{background:var(--think);color:var(--on-acc);border-color:var(--think)}
+.wgfoot{justify-content:space-between;margin-top:6px}.wgbar{display:grid;grid-template-columns:7em 1fr 3em;gap:8px;align-items:center;margin:6px 0;font-size:13px}.wgbar div{height:8px;border-radius:9px;background:var(--line);overflow:hidden}.wgbar i{display:block;height:100%;background:var(--warn)}
+.wgrules{margin:8px 0;padding-left:1.2em;line-height:1.7;font-size:14px}.wgtl{padding-left:1.2em;line-height:1.8;font-size:14px}.wgend.win h2{color:var(--eq)}.wgrevbox{background:var(--think-soft);border-radius:12px;padding:10px 12px;margin:8px 0;line-height:1.7}
 .lmode{margin-bottom:4px}.pzlines{display:flex;flex-direction:column;gap:8px;margin:12px 0}
 .pzl{display:flex;gap:10px;align-items:flex-start;line-height:1.6}.pzw{flex:none;min-width:3.2em;font-weight:700;color:var(--think)}
 .pzl.wf .pzw{display:inline-flex;align-items:center;justify-content:center;min-width:2.6em;height:2.6em;border-radius:50%;background:var(--think-soft);font-size:13px}
@@ -277,7 +294,7 @@ ol.steps{padding-left:1.3em;margin:8px 0;display:flex;flex-direction:column;gap:
 .ckl{display:flex;gap:8px;align-items:flex-start;font-size:13px;margin:8px 0;line-height:1.5}.ckl input{margin-top:3px;width:auto}
 .cbar{display:flex;gap:8px;justify-content:space-between;align-items:center;margin-bottom:8px}.cbar .cset{max-width:62%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .cbar .lsb.on{background:var(--es);color:#fff;border-color:var(--es)}.cfilt>.lbl{display:block;margin:8px 0 4px}.lsbig{font-size:46px;line-height:1.2;margin:8px 0}
-.wlstat{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:10px}.wlstat div{background:var(--card,#fff);border-radius:14px;padding:10px 4px;text-align:center;display:flex;flex-direction:column}.wlstat b{font-size:20px;color:var(--es)}.wlstat span{font-size:11px;opacity:.7}
+.wlstat{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:10px}.wlstat div{background:var(--solid);border-radius:14px;padding:10px 4px;text-align:center;display:flex;flex-direction:column}.wlstat b{font-size:20px;color:var(--es)}.wlstat span{font-size:11px;opacity:.7}
 .wls{font-weight:600}.wls.ok{color:var(--good,#4a9a6a)}.wls.ing{color:var(--es)}.kitem.wl{cursor:pointer;position:relative;padding-right:64px}.wlact{position:absolute;right:12px;top:50%;transform:translateY(-50%);flex-direction:column;gap:4px;margin:0}
 .cbar .sayb{border-color:var(--es);color:var(--es);font-weight:700}.cfilt{margin-bottom:6px}
 .sayc textarea{min-height:64px}.sayr{margin-top:12px;padding-top:12px;border-top:1px solid var(--line,rgba(0,0,0,.08))}.sayes{font-size:20px;font-weight:700;color:var(--es);line-height:1.4}
@@ -1263,7 +1280,7 @@ const DISTRACT=`干扰项（错误选项）的要求，非常重要：
 - notes 数组和 opts 一一对应：正确项写空字符串，每个错误项用一句话写出“它为什么看起来对、错在哪里”。`;
 const LOGIC_GEN=(th,avoid)=>`出一道“逻辑找茬”选择题，主题：${th}，这次的漏洞类型用：${rnd(FLAVOR.logic)}。给一段生活中常见的说法（广告、传言、日常推理、生意判断），里面藏着一个逻辑漏洞（如以偏概全、因果倒置、幸存者偏差、非此即彼、偷换概念、诉诸权威、样本太少等）。${ME}贴近他的生活。避免和这些重复：${avoid||"无"}。\n错误选项可以是其他谬误名称，或看似合理但抓错重点的分析。\n${DISTRACT}\n只回复JSON：{"text":"那段说法","q":"问题","opts":["选项A","选项B","选项C","选项D"],"ans":正确选项序号0到3,"why":"中文解释，点出漏洞名称","notes":["","错误项的迷惑点","错误项的迷惑点","错误项的迷惑点"]}`;
 function thLogic(){
-  const lm=logicMode();if(lm!=="find")return lm==="soup"?thSoup():thPuzzle(lm);
+  const lm=logicMode();if(lm!=="find")return lm==="soup"?thSoup():lm==="wolf"?thWolf():thPuzzle(lm);
   const q=curItem("logic",LOGIC),body=$("#body"),s=S(),acc=s.scores.logic.length?Math.round(s.scores.logic.reduce((a,b)=>a+b,0)/s.scores.logic.length):null;
   body.innerHTML=`${logicModesHTML("find")}${chipsHTML("logic")}${genbar("logic")}${errNote(q)}<div class="card m-think"><div class="row" style="justify-content:space-between"><span class="lbl">这段话有问题吗？</span>${srcTag(q)}</div>
    <p class="essay">“${esc(String(q.text).replace(/^[“"]|[”"]$/g,""))}”</p><p class="note"><b>${esc(q.q)}</b></p></div>
@@ -2748,7 +2765,7 @@ const PZ_CHECK={
 const PZ_POOL={wolf:WOLF,liar:LIAR,soup:SOUP};
 const PZ_INTRO={
  find:"",
- wolf:"规则：本局只有 1 个狼人、1 个真预言家。好人说的话都是真的，狼人可能说谎。从发言里找出矛盾，揪出狼人。",
+ wolf:"实战对局：和 6 个 AI 玩家打一局完整的狼人杀。推理题：只有 1 个狼人，好人说真话，从发言里找矛盾。",
  liar:"从几个人的话里找矛盾。小技巧：先找两句“正好相反”的话，它们一定一真一假。",
  soup:"读汤面，然后问能用“是 / 不是”回答的问题，一步步还原真相。问得越少越厉害。"};
 function logicModesHTML(m){return `<div class="chips lmode" id="lmode">${Object.entries(LOGIC_MODES).map(([k,n])=>`<button data-m="${k}" class="${k===m?"on":""}">${n}</button>`).join("")}</div>${PZ_INTRO[m]?`<p class="hint">${PZ_INTRO[m]}</p>`:""}`}
@@ -2758,14 +2775,14 @@ function pzNext(k,rerender){return async()=>{const n=await nextItem({k,theme:"�
 /* 狼人杀 / 谁在说谎：选择题 */
 function thPuzzle(k){const it=curItem(k,PZ_POOL[k]),body=$("#body"),wolf=k==="wolf";
   const lines=(it.lines||[]).map(([who,txt])=>`<div class="pzl${wolf?" wf":""}"><span class="pzw">${esc(who)}</span><span class="pzt">${esc(txt)}</span></div>`).join("");
-  body.innerHTML=`${logicModesHTML(k)}${genbar(k)}${errNote(it)}
+  body.innerHTML=`${logicModesHTML(k)}${wolf?wgSubHTML("puzzle"):""}${genbar(k)}${errNote(it)}
    <div class="card m-think pzcard"><div class="row" style="justify-content:space-between;align-items:center"><h2>${esc(it.t)}</h2><span class="row" style="gap:6px">${it.lv?`<span class="tag">${esc(it.lv)}</span>`:""}${srcTag(it)}</span></div>
     ${it.ctx?`<p class="note">${esc(it.ctx)}</p>`:""}${it.rules?`<p class="note pzinfo">📌 ${esc(it.rules)}</p>`:""}${it.rule?`<p class="note pzinfo">📌 ${esc(it.rule)}</p>`:""}
     <div class="pzlines">${lines}</div><p class="note"><b>${esc(it.q||"谁是狼人？")}</b></p></div>
    <div class="opts ${wolf?"pzseats":""}">${(wolf?it.opts.map((o,i)=>i).sort((x,y)=>(parseInt(it.opts[x])||0)-(parseInt(it.opts[y])||0)):it.opts.map((o,i)=>i)).map((i,n)=>`<button class="opt" data-i="${i}">${wolf?`<span class="seat">${esc(it.opts[i])}</span>`:`<span class="k">${"ABCDEFG"[n]}</span>${esc(it.opts[i])}`}</button>`).join("")}</div>
    <div id="ex"></div><button class="btn ghost" id="nx2">下一题</button>
    <p class="hint">${apiHint()}</p>`;
-  bindLogicModes();bindGen(pzNext(k,()=>thPuzzle(k)));
+  bindLogicModes();if(wolf)bindWgSub();bindGen(pzNext(k,()=>thPuzzle(k)));
   body.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{const i=+b.dataset.i,ans=+it.ans,ok=i===ans;
     body.querySelectorAll(".opt").forEach(x=>{const j=+x.dataset.i;x.disabled=true;x.classList.add(j===ans?"good":j===i?"bad":"dim2")});
     $("#ex").innerHTML=`<div class="card m-think"><h2>${ok?(wolf?"抓到狼了 🐺 ✓":"答对了 ✓"):"答案是 "+esc(it.opts[ans])}</h2><p class="lbl">推理过程</p><div class="pzwhy">${String(it.why||"").split(/\n+/).filter(Boolean).map(x=>`<p>${esc(x)}</p>`).join("")}</div></div>`;
@@ -2856,6 +2873,286 @@ TR("约会交友","这周六你有空吗？我想请你吃饭。","¿Estás libr
 TR("约会交友","和你聊天很开心，下次再见吧。","Me encantó conversar contigo. ¡Nos vemos la próxima!");
 TR("约会交友","你喜欢吃什么？我知道一家很好吃的秘鲁菜馆。","¿Qué te gusta comer? Conozco un restaurante peruano muy rico.");
 RP("约会交友","约女生喝咖啡","你在朋友聚会上认识了一个秘鲁女生，想约她改天喝咖啡。","自然地聊几句，要到联系方式并约好时间","una chica peruana simpática que conociste en una reunión de amigos, algo tímida al principio","Hola… ¿tú eres el amigo de Carlos, no?");
+
+/* ================= 狼人杀实战：7人局引擎（2狼、预言家、女巫、3村民） ================= */
+const WG_NAMES=["阿杰","小林","Lucía","大伟","阿芳","Carlos","小陈"];
+const WG_ROLE={wolf:"狼人",seer:"预言家",witch:"女巫",vill:"村民"};
+const WG_TONE=[["说实话，","我直说了，","兄弟们，"],["我想了一下，","嗯……","我比较谨慎，"],["Bueno，","好，","我觉得很明显，"],["我先说，","这个嘛，","来，"],["我听了一圈，","哎，","我说两句，"],["Mira，","OK，","我的想法是，"],["我简单说，","那个……","我分析一下，"]];
+const wgR=a=>a[Math.floor(Math.random()*a.length)];
+const wgShuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+function wgNew(pick){const n=7,me=Math.floor(Math.random()*n);let roles=wgShuf(["wolf","wolf","seer","witch","vill","vill","vill"]);
+  if(pick&&pick!=="rand"&&roles[me]!==pick){const j=roles.findIndex((r,i)=>r===pick&&i!==me);[roles[me],roles[j]]=[roles[j],roles[me]]}
+  const ps=roles.map((role,i)=>({name:i===me?"你":WG_NAMES[i],role,alive:true}));
+  const g={v:1,n,me,ps,day:1,phase:"night",step:"kill",potion:{save:1,poison:1},night:{},checks:[],claims:[],wclaims:[],ops:[],deaths:[],log:[],truth:[],marks:{},myVotes:[],lastSpoke:{}};
+  wgLog(g,"sys",`第 1 晚 · 天黑请闭眼`);wgNight(g);return g}
+const wgName=(g,i)=>`${i+1}号 ${g.ps[i].name}`;
+const wgAlive=g=>g.ps.map((p,i)=>i).filter(i=>g.ps[i].alive);
+const wgWolves=g=>g.ps.map((p,i)=>i).filter(i=>g.ps[i].role==="wolf");
+const wgRoleOf=(g,r)=>g.ps.findIndex(p=>p.role===r);
+function wgLog(g,k,text,extra){g.log.push({d:g.day,k,text,...(extra||{})})}
+/* ---- 推理核心：把所有可能的“谁是狼”组合列出来，排除和事实矛盾的，算每个人是狼的概率 ---- */
+function wgSus(g,viewer){const n=g.n,role=viewer>=0?g.ps[viewer].role:null,w=new Array(n).fill(0);let tot=0;
+  const seerC={},witchC={};g.claims.forEach(c=>{(seerC[c.p]=seerC[c.p]||[]).push(...c.checks)});g.wclaims.forEach(c=>{(witchC[c.p]=witchC[c.p]||[]).push(c)});
+  for(let a=0;a<n;a++)for(let b=a+1;b<n;b++){const W=x=>x===a||x===b;
+    if(viewer>=0&&role!=="wolf"&&W(viewer))continue;
+    let ok=true,gs=0,gw=0;
+    for(const p in seerC){const c=+p;if(W(c))continue;gs++;if(role==="seer"&&c!==viewer)ok=false;if(seerC[p].some(k=>W(k.t)!==k.wolf))ok=false}
+    for(const p in witchC){const c=+p;if(W(c))continue;gw++;if(role==="witch"&&c!==viewer)ok=false;if(witchC[p].some(k=>k.save!=null&&W(k.save)))ok=false}
+    if(gs>1||gw>1)ok=false;
+    if(role==="seer")g.checks.forEach(k=>{if(W(k.t)!==k.wolf)ok=false});
+    if(role==="witch")g.truth.forEach(t=>{if(t.kill!=null&&W(t.kill))ok=false});
+    if(!ok)continue;
+    let wt=1;g.deaths.forEach(d=>{if(d.how==="night"&&W(d.p))wt*=0.25});
+    g.claims.forEach(c=>{const first=g.claims.find(o=>o.p!==c.p&&(o.day<c.day||(o.day===c.day&&o.seq<c.seq)));
+      if(first&&c.checks.some(k=>k.t===first.p&&k.wolf))wt*=W(c.p)?1.8:0.55;
+      if(g.claims.length===1&&W(c.p))wt*=0.3});
+    g.wclaims.forEach(c=>{if(W(c.p))wt*=0.3});
+    (g.votes||[]).forEach(v=>{if(v.t==null)return;if(W(v.v)&&W(v.t))wt*=0.5;else if(W(v.v)&&!W(v.t))wt*=1.2;else if(!W(v.v)&&!W(v.t))wt*=0.88});
+    tot+=wt;w[a]+=wt;w[b]+=wt}
+  let s=tot?w.map(x=>x/tot):g.ps.map((p,i)=>i===viewer?0:2/(n-1));
+  s=s.slice();const base=s.slice();g.ops.forEach(o=>{if(o.p===viewer)return;const tr=Math.max(0,1-base[o.p]*2);s[o.t]=Math.max(0,Math.min(1,s[o.t]+(o.kind==="sus"?0.05:-0.05)*tr))});
+  if(viewer>=0)s[viewer]=0;return s}
+const wgTop=(g,s,ex,pool)=>{let best=-1,bv=-1;wgShuf(pool||wgAlive(g)).forEach(i=>{if(ex.includes(i))return;if(s[i]>bv){bv=s[i];best=i}});return best};
+/* ---- 夜晚 ---- */
+function wgNight(g){g.phase="night";g.night={};g.step="kill";wgNightGo(g)}
+const wgMeAct=(g,role)=>g.ps[g.me].alive&&g.ps[g.me].role===role;
+function wgNightGo(g){
+  while(g.phase==="night"){
+    if(g.step==="kill"){const wolves=wgWolves(g).filter(i=>g.ps[i].alive);
+      if(wolves.includes(g.me)&&g.ps[g.me].alive&&g.night.kill==null)return;      /* 等你选刀人 */
+      if(g.night.kill==null)g.night.kill=wgWolfKill(g);g.step="witch";continue}
+    if(g.step==="witch"){const wi=wgRoleOf(g,"witch");
+      if(g.ps[wi].alive){if(wi===g.me&&g.night.witchDone==null)return;if(wi!==g.me)wgWitchAI(g,wi)}
+      g.step="seer";continue}
+    if(g.step==="seer"){const si=wgRoleOf(g,"seer");
+      if(g.ps[si].alive){if(si===g.me&&g.night.check==null)return;if(si!==g.me){const s=wgSus(g,si),done=g.checks.map(k=>k.t);
+        let t=wgTop(g,s,[si,...done]);if(t<0)t=wgTop(g,s,[si]);if(t>=0)g.checks.push({t,wolf:g.ps[t].role==="wolf",n:g.day})}}
+      wgDawn(g);return}}}
+function wgWolfKill(g){const good=wgAlive(g).filter(i=>g.ps[i].role!=="wolf");if(!good.length)return null;
+  const obs=wgSus(g,-1),sc=good.filter(i=>g.claims.some(c=>c.p===i)),wc=good.filter(i=>g.wclaims.some(c=>c.p===i));
+  if(sc.length)return sc.sort((a,b)=>obs[a]-obs[b])[0];if(wc.length)return wc[0];
+  return Math.random()<0.6?good.sort((a,b)=>obs[a]-obs[b])[0]:wgR(good)}
+function wgWitchAI(g,wi){const v=g.night.kill,s=wgSus(g,wi);g.night.witchDone=1;
+  if(v!=null&&g.potion.save&&(g.day===1?Math.random()<0.85:(g.claims.some(c=>c.p===v)&&s[v]<0.25))){g.night.save=v;g.potion.save=0;return}
+  if(g.potion.poison&&g.day>=2){const t=wgTop(g,s,[wi]);if(t>=0&&s[t]>=0.6){g.night.poison=t;g.potion.poison=0}}}
+function wgDawn(g){const nt=g.night,dead=[];
+  if(nt.kill!=null&&nt.save!==nt.kill)dead.push(nt.kill);if(nt.poison!=null&&!dead.includes(nt.poison))dead.push(nt.poison);
+  g.truth.push({night:g.day,kill:nt.kill,save:nt.save,poison:nt.poison,check:g.checks.find(k=>k.n===g.day)||null});
+  dead.forEach(p=>{g.ps[p].alive=false;g.deaths.push({p,day:g.day,how:"night"})});
+  wgLog(g,"sys",`第 ${g.day} 天 · 天亮了。${dead.length?"昨晚 "+dead.sort((a,b)=>a-b).map(p=>wgName(g,p)).join("、")+" 倒下了。":"昨晚是平安夜，没有人死。"}`);
+  if(wgWin(g))return;
+  g.phase="day";const start=dead.length?(Math.min(...dead)+1)%g.n:(g.day-1)%g.n;
+  const order=[];for(let k=0;k<g.n;k++){const i=(start+k)%g.n;if(g.ps[i].alive)order.push(i)}
+  g.speak={order,i:0,last:g.day===1?dead.slice():[]};wgDayGo(g)}
+function wgWin(g){const a=wgAlive(g),wa=a.filter(i=>g.ps[i].role==="wolf").length,ga=a.length-wa;
+  if(wa===0){g.phase="end";g.result="good";wgLog(g,"sys","狼人全部出局，好人胜利！");return true}
+  if(wa>=ga){g.phase="end";g.result="wolf";wgLog(g,"sys","狼人数量追平好人，狼人胜利！");return true}return false}
+/* ---- 白天发言 ---- */
+function wgDayGo(g){
+  while(g.speak.last.length){const p=g.speak.last.shift();if(p===g.me){g.speak.last.unshift(p);g.speak.lastMe=1;return}wgLastWords(g,p)}
+  while(g.phase==="day"&&g.speak.i<g.speak.order.length){const p=g.speak.order[g.speak.i];
+    if(!g.ps[p].alive){g.speak.i++;continue}if(p===g.me)return;wgSpeakAI(g,p);g.speak.i++}
+  if(g.phase==="day"){g.phase="vote";wgLog(g,"sys","发言结束，开始投票。")}}
+function wgSay(g,p,text){wgLog(g,"say",text,{p});g.lastSpoke[p]=g.day}
+function wgClaim(g,p,check){let c=g.claims.find(c=>c.p===p);if(!c){c={p,checks:[],day:g.day,seq:g.log.length};g.claims.push(c)}if(check&&!c.checks.some(k=>k.t===check.t&&k.n===check.n))c.checks.push(check);return c}
+const wgRes=w=>w?"是狼人（查杀）":"是好人（金水）";
+function wgReason(g,p,x,s){const trusted=g.claims.filter(c=>c.p!==x&&c.p!==p&&s[c.p]<0.35&&c.checks.some(k=>k.t===x&&k.wolf));
+  if(trusted.length)return `${trusted[0].p+1}号是我信的预言家，他查杀了 ${x+1} 号`;
+  const other=g.claims.find(c=>c.p!==x);if(g.claims.some(c=>c.p===x)&&other)return `${x+1} 号和 ${other.p+1} 号对跳预言家，我更信 ${other.p+1} 号`;
+  const wc=g.wclaims.find(c=>c.save!=null&&s[c.p]<0.4);if(wc&&g.claims.some(c=>c.p===x&&c.checks.some(k=>k.t===wc.save&&k.wolf)))return `${x+1} 号查杀了女巫救过的人，验人对不上`;
+  return wgR([`${x+1} 号的发言一直在绕，没给出有用的信息`,`从目前的信息看，${x+1} 号嫌疑最大`,`${x+1} 号站边站得很奇怪`])}
+function wgSpeakAI(g,p){const me=g.ps[p],tone=wgR(WG_TONE[p]),s=me.role==="wolf"?null:wgSus(g,p),alive=wgAlive(g);
+  if(me.role==="seer"){const c=g.claims.find(c=>c.p===p),mine=g.checks;
+    const claimNow=c||mine.some(k=>k.wolf)||g.claims.length>0||g.day>=2||Math.random()<0.5;
+    if(claimNow&&mine.length){const fresh=c?mine.filter(k=>!c.checks.some(x=>x.t===k.t&&x.n===k.n)):mine;fresh.forEach(k=>wgClaim(g,p,k));
+      const wolfAlive=mine.filter(k=>k.wolf&&g.ps[k.t].alive);
+      const rep=(c?fresh:mine).map(k=>`第 ${k.n} 晚验了 ${k.t+1} 号，${wgRes(k.wolf)}`).join("；");
+      let t=`${tone}${c?"":"我是预言家。"}${rep||"我的验人前面都报过了"}。`;
+      if(wolfAlive.length){t+=`今天请大家出 ${wolfAlive[0].t+1} 号。`;g.ops.push({p,t:wolfAlive[0].t,kind:"sus",d:g.day})}
+      const fake=g.claims.find(x=>x.p!==p);if(fake){t+=` ${fake.p+1} 号跟我对跳，他一定是狼。`;g.ops.push({p,t:fake.p,kind:"sus",d:g.day})}
+      wgSay(g,p,t);return}}
+  if(me.role==="witch"&&!g.wclaims.some(c=>c.p===p)){const saved=g.truth.find(t=>t.save!=null);
+    const liar=saved&&g.claims.find(c=>c.checks.some(k=>k.t===saved.save&&k.wolf));
+    if(liar){g.wclaims.push({p,save:saved.save,night:saved.night});g.ops.push({p,t:liar.p,kind:"sus",d:g.day});
+      wgSay(g,p,`${tone}我是女巫。第 ${saved.night} 晚狼人刀的是 ${saved.save+1} 号，我救了他，所以他是好人。${liar.p+1} 号说他是狼，${liar.p+1} 号是假预言家，出他！`);return}}
+  if(me.role==="wolf"){const mates=wgWolves(g).filter(i=>i!==p),good=alive.filter(i=>g.ps[i].role!=="wolf"),obs=wgSus(g,-1);
+    const myC=g.claims.find(c=>c.p===p),wolfClaimed=g.claims.some(c=>g.ps[c.p].role==="wolf");
+    const realC=g.claims.find(c=>g.ps[c.p].role!=="wolf"&&g.ps[c.p].alive);
+    const danger=realC&&realC.checks.some(k=>k.wolf&&g.ps[k.t].alive);
+    if(myC||(!wolfClaimed&&realC&&(danger||Math.random()<0.5))){
+      const tgt=realC&&g.ps[realC.p].alive?realC.p:wgR(good.length?good:alive.filter(i=>i!==p));
+      const k={t:tgt,wolf:true,n:g.day};wgClaim(g,p,k);g.ops.push({p,t:tgt,kind:"sus",d:g.day});
+      wgSay(g,p,`${tone}${myC?"":"我才是真预言家！"}昨晚我验了 ${tgt+1} 号，是狼人。${realC&&realC.p!==tgt?`${realC.p+1} 号是假的，`:""}今天出 ${tgt+1} 号。`);return}
+    const ally=g.claims.find(c=>mates.includes(c.p)&&g.ps[c.p].alive);
+    if(ally){const t=ally.checks.length?ally.checks[ally.checks.length-1].t:null;if(t!=null&&g.ps[t].alive){g.ops.push({p,t,kind:"sus",d:g.day});wgSay(g,p,`${tone}我站 ${ally.p+1} 号，他的发言更像真预言家。跟着出 ${t+1} 号。`);return}}
+    const x=good.filter(i=>i!==p).sort((a,b)=>obs[b]-obs[a])[0];
+    if(x!=null&&Math.random()<0.8){g.ops.push({p,t:x,kind:"sus",d:g.day});wgSay(g,p,`${tone}${wgR([`我觉得 ${x+1} 号有问题，`,`${x+1} 号给我的感觉不太好，`])}${wgR(["发言太划水了。","一直在跟风。","站边站得很奇怪。"])}我今天投 ${x+1} 号。`);return}
+    wgSay(g,p,`${tone}我是好人，信息不多，先听后面的人怎么说。`);return}
+  /* 好人（村民、没跳的预言家、女巫） */
+  const x=wgTop(g,s,[p]);
+  if(x>=0&&s[x]>=(g.day>=2?0.45:0.5)){g.ops.push({p,t:x,kind:"sus",d:g.day});wgSay(g,p,`${tone}${wgReason(g,p,x,s)}。我今天投 ${x+1} 号。`);return}
+  const sc=g.claims.filter(c=>g.ps[c.p].alive);
+  if(sc.length===1&&s[sc[0].p]<0.3){wgSay(g,p,`${tone}目前只有 ${sc[0].p+1} 号跳了预言家，我先信他。`);g.ops.push({p,t:sc[0].p,kind:"good",d:g.day});return}
+  if(x>=0&&s[x]>=0.38){wgSay(g,p,`${tone}信息还不多，我暂时比较怀疑 ${x+1} 号，先听后面。`);return}
+  wgSay(g,p,`${tone}${wgR(["我是好人，暂时没什么信息，先听大家的。","没有特别怀疑的人，过。","我先不乱说，投票时再看。"])}`)}
+function wgLastWords(g,p){const me=g.ps[p];
+  if(me.role==="seer"&&g.checks.length){g.checks.forEach(k=>wgClaim(g,p,k));wgSay(g,p,`（遗言）我是预言家，${g.checks.map(k=>`验了 ${k.t+1} 号，${wgRes(k.wolf)}`).join("；")}。好人们加油！`);return}
+  if(me.role==="witch"){const sv=g.truth.find(t=>t.save!=null);if(sv){g.wclaims.push({p,save:sv.save,night:sv.night});wgSay(g,p,`（遗言）我是女巫，第 ${sv.night} 晚救了 ${sv.save+1} 号，他是好人。`);return}}
+  if(me.role==="wolf"){const good=wgAlive(g).filter(i=>g.ps[i].role!=="wolf");const t=good.length?wgR(good):null;if(t!=null){g.ops.push({p,t,kind:"sus",d:g.day});wgSay(g,p,`（遗言）我是好人，你们投错了。我觉得 ${t+1} 号是狼。`);return}}
+  const s=wgSus(g,p),x=wgTop(g,s,[p]);if(x>=0&&s[x]>0.4){g.ops.push({p,t:x,kind:"sus",d:g.day});wgSay(g,p,`（遗言）我是好人。我最怀疑 ${x+1} 号，大家看着办。`)}else wgSay(g,p,"（遗言）我是好人，没什么信息，好人加油。")}
+/* 你发言 */
+function wgMySpeech(g,{claim,fake,op}){const p=g.me,bits=[];
+  if(g.speak.lastMe){delete g.speak.lastMe;g.speak.last.shift();}
+  if(claim==="seer"){const c=g.claims.find(c=>c.p===p);
+    if(g.ps[p].role==="seer"){const fresh=g.checks.filter(k=>!c||!c.checks.some(x=>x.t===k.t&&x.n===k.n));fresh.forEach(k=>wgClaim(g,p,k));
+      bits.push(`${c?"":"我是预言家。"}${(fresh.length?fresh:g.checks).map(k=>`第 ${k.n} 晚验了 ${k.t+1} 号，${wgRes(k.wolf)}`).join("；")||"还没验人"}。`)}
+    else if(fake){wgClaim(g,p,{t:fake.t,wolf:fake.wolf,n:g.day});bits.push(`${c?"":"我是预言家。"}昨晚验了 ${fake.t+1} 号，${wgRes(fake.wolf)}。`);if(fake.wolf)g.ops.push({p,t:fake.t,kind:"sus",d:g.day})}}
+  if(claim==="witch"&&g.ps[p].role==="witch"){const sv=g.truth.find(t=>t.save!=null),po=g.truth.find(t=>t.poison!=null);
+    if(sv&&!g.wclaims.some(c=>c.p===p))g.wclaims.push({p,save:sv.save,night:sv.night});
+    bits.push(`我是女巫。${sv?`第 ${sv.night} 晚我救了 ${sv.save+1} 号，他是好人。`:"解药还没用。"}${po?`第 ${po.night} 晚我毒了 ${po.poison+1} 号。`:""}`)}
+  if(op&&op.t!=null){g.ops.push({p,t:op.t,kind:op.kind,d:g.day});bits.push(op.kind==="sus"?`我怀疑 ${op.t+1} 号，今天投他。`:`我觉得 ${op.t+1} 号是好人。`)}
+  wgSay(g,p,bits.join("")||"过。");
+  if(!g.ps[p].alive){wgDayGo(g);return}
+  g.speak.i++;wgDayGo(g)}
+/* ---- 投票 ---- */
+function wgVote(g,myVote){const alive=wgAlive(g),votes={},obs=wgSus(g,-1);
+  const wolfT=(()=>{const good=alive.filter(i=>g.ps[i].role!=="wolf");const fk=g.claims.filter(c=>g.ps[c.p].role==="wolf"&&g.ps[c.p].alive).flatMap(c=>c.checks).filter(k=>k.wolf&&g.ps[k.t].alive&&g.ps[k.t].role!=="wolf");
+    if(fk.length)return fk[fk.length-1].t;const real=g.claims.find(c=>g.ps[c.p].role!=="wolf"&&g.ps[c.p].alive);if(real&&Math.random()<0.6)return real.p;return good.sort((a,b)=>obs[b]-obs[a])[0]})();
+  alive.forEach(p=>{let v;
+    if(p===g.me)v=myVote;
+    else if(g.ps[p].role==="wolf"){const lowInfo=!g.claims.length&&Math.max(...alive.filter(i=>g.ps[i].role!=="wolf").map(i=>obs[i]))<0.4;
+      v=lowInfo?(Math.random()<0.5?null:wgR(alive.filter(i=>g.ps[i].role!=="wolf"))):wolfT}
+    else{const s=wgSus(g,p);const ck=g.ps[p].role==="seer"?g.checks.find(k=>k.wolf&&g.ps[k.t].alive):null;v=ck?ck.t:wgTop(g,s,[p]);if(!ck&&s[v]<0.3&&Math.random()<0.6)v=null}
+    if(v!=null&&v>=0&&g.ps[v].alive)(votes[v]=votes[v]||[]).push(p)});
+  const rows=Object.entries(votes).map(([t,vs])=>[+t,vs]).sort((a,b)=>b[1].length-a[1].length);
+  wgLog(g,"vote","投票："+(rows.length?rows.map(([t,vs])=>`${t+1}号 ← ${vs.map(v=>v+1).join("、")}（${vs.length}票）`).join("；"):"所有人弃票"),{rows});
+  g.votes=g.votes||[];Object.entries(votes).forEach(([t,vs])=>vs.forEach(v=>g.votes.push({d:g.day,v,t:+t})));
+  if(myVote!=null)g.myVotes.push({d:g.day,t:myVote,wolf:g.ps[myVote].role==="wolf"});
+  const top=rows[0];
+  if(!top||(rows[1]&&rows[1][1].length===top[1].length)){wgLog(g,"sys","平票，今天没有人出局。")}
+  else{const x=top[0];g.ps[x].alive=false;g.deaths.push({p:x,day:g.day,how:"vote"});wgLog(g,"sys",`${wgName(g,x)} 被投票出局。`);
+    if(wgWin(g))return;if(x!==g.me)wgLastWords(g,x)}
+  if(wgWin(g))return;g.day++;wgLog(g,"sys",`第 ${g.day} 晚 · 天黑请闭眼`);wgNight(g)}
+/* 你在夜里的行动 */
+function wgMyNight(g,a){
+  if(g.step==="kill")g.night.kill=a.t;
+  else if(g.step==="witch"){g.night.witchDone=1;if(a.save&&g.potion.save&&g.night.kill!=null){g.night.save=g.night.kill;g.potion.save=0}
+    else if(a.poison!=null&&g.potion.poison){g.night.poison=a.poison;g.potion.poison=0}}
+  else if(g.step==="seer"){g.night.check=a.t;g.checks.push({t:a.t,wolf:g.ps[a.t].role==="wolf",n:g.day});wgLog(g,"priv",`你查验了 ${wgName(g,a.t)}：${g.ps[a.t].role==="wolf"?"狼人 🐺":"好人 ✓"}`)}
+  wgNightGo(g)}
+/* 你死了以后：自动推进 */
+function wgAuto(g){let guard=0;while(g.phase!=="end"&&guard++<60){
+  if(g.phase==="night"){if(g.ps[g.me].alive)return;wgNightGo(g)}
+  else if(g.phase==="day"){if(g.speak.lastMe){wgMySpeech(g,{});continue}if(g.ps[g.me].alive&&g.speak.order[g.speak.i]===g.me)return;g.speak.i++;wgDayGo(g)}
+  else if(g.phase==="vote"){if(g.ps[g.me].alive)return;wgVote(g,null)}}}
+/* ================= 狼人杀实战：界面 ================= */
+const wgSub=()=>store.get("lgf-wolf-sub","game");
+function wgSubHTML(cur){return `<div class="seg wgsub" id="wgsub"><button data-w="game" class="${cur==="game"?"on":""}">🎮 实战对局</button><button data-w="puzzle" class="${cur==="puzzle"?"on":""}">🧩 推理题</button></div>`}
+function bindWgSub(){document.querySelectorAll("#wgsub button").forEach(b=>b.onclick=()=>{store.set("lgf-wolf-sub",b.dataset.w);thLogic()})}
+let WG_COMPOSE={claim:"none",op:"none",t:null,ft:null,fw:true},WG_SHOW_AN=false,WG_PICK=null;
+const wgSave=g=>store.set("lgf-wg",g);
+function thWolf(){if(wgSub()==="puzzle")return thPuzzle("wolf");
+  const body=$("#body");let g=store.get("lgf-wg",null);
+  const head=`${logicModesHTML("wolf")}${wgSubHTML("game")}`;
+  if(!g){const pick=store.get("lgf-wg-role","rand");
+    body.innerHTML=`${head}<div class="card m-think wgstart"><h2>🐺 7 人狼人杀</h2>
+      <p class="note">你和 6 个 AI 玩家同桌：<b>2 个狼人</b>、<b>1 个预言家</b>、<b>1 个女巫</b>、<b>3 个村民</b>。</p>
+      <ul class="wgrules"><li><b>好人</b>：投票把 2 个狼人都找出来就赢。</li><li><b>狼人</b>：活着的狼人和好人一样多就赢。</li>
+      <li><b>预言家</b>每晚查验一个人是不是狼；<b>女巫</b>有一瓶解药、一瓶毒药，各用一次，同一晚只能用一瓶。</li>
+      <li>白天每人轮流发言，然后投票，票最多的人出局，平票就没人出局。出局的人不翻牌。</li></ul>
+      <p class="lbl">我想当</p><div class="chips" id="wgrole">${[["rand","随机"],["vill","村民"],["seer","预言家"],["witch","女巫"],["wolf","狼人"]].map(([k,n])=>`<button data-r="${k}" class="${k===pick?"on":""}">${n}</button>`).join("")}</div>
+      <button class="btn" id="wggo">开始对局</button></div>
+      <p class="hint">AI 玩家会根据所有人的发言、查验结果、投票记录推理谁是狼。他们也会说谎、对跳、互相站边。整局不花 API，打完可以让 AI 帮你复盘。</p>`;
+    bindLogicModes();bindWgSub();
+    body.querySelectorAll("#wgrole button").forEach(b=>b.onclick=()=>{store.set("lgf-wg-role",b.dataset.r);thWolf()});
+    $("#wggo").onclick=()=>{const g=wgNew(store.get("lgf-wg-role","rand"));WG_COMPOSE={claim:"none",op:"none",t:null,ft:null,fw:true};WG_SHOW_AN=false;wgSave(g);thWolf();window.scrollTo(0,0)};return}
+  const me=g.me,my=g.ps[me],alive=my.alive,mates=my.role==="wolf"?wgWolves(g).filter(i=>i!==me):[];
+  const phaseTx=g.phase==="night"?`第 ${g.day} 晚 · 夜晚`:g.phase==="day"?`第 ${g.day} 天 · 发言`:g.phase==="vote"?`第 ${g.day} 天 · 投票`:"对局结束";
+  const known=i=>{if(g.phase==="end")return g.ps[i].role;if(i===me)return my.role;if(mates.includes(i))return "wolf";const ck=my.role==="seer"&&g.checks.find(k=>k.t===i);return ck?(ck.wolf?"wolf":"good"):null};
+  const markIco={good:"✓",wolf:"🐺",q:"?"};
+  const seat=i=>{const p=g.ps[i],k=known(i),m=g.marks[i],cl=g.claims.some(c=>c.p===i),wc=g.wclaims.some(c=>c.p===i);
+    const sel=WG_PICK&&WG_PICK.ok(i);
+    return `<button class="wgseat${p.alive?"":" dead"}${i===me?" me":""}${sel?" pick":""}${WG_PICK&&WG_PICK.val===i?" picked":""}" data-i="${i}" ${WG_PICK&&!sel?"disabled":""}>
+      <span class="wgno">${i+1}</span><span class="wgnm">${esc(p.name)}</span>
+      <span class="wgtag">${k?`<b class="r-${k}">${k==="good"?"好人":WG_ROLE[k]}</b>`:m?`<b class="mk">${markIco[m]}</b>`:""}${cl?`<i>跳预</i>`:""}${wc?`<i>女巫</i>`:""}${p.alive?"":"<i>出局</i>"}</span></button>`};
+  const priv=(()=>{const r=my.role;let t=`你是 <b>${me+1}号</b> · <b class="r-${r}">${WG_ROLE[r]}</b>${alive?"":"（已出局）"}`;
+    if(r==="wolf")t+=`。队友：<b>${mates.map(i=>i+1+"号").join("、")}</b>`;
+    if(r==="seer")t+=g.checks.length?`<br>查验：${g.checks.map(k=>`${k.t+1}号${k.wolf?"🐺狼":"✓好"}`).join("　")}`:"<br>还没有查验";
+    if(r==="witch")t+=`<br>解药 ${g.potion.save?"✓":"已用"} · 毒药 ${g.potion.poison?"✓":"已用"}`;return t})();
+  const feed=(()=>{const days={};g.log.forEach(l=>{(days[l.d]=days[l.d]||[]).push(l)});const ks=Object.keys(days).map(Number).sort((a,b)=>a-b);
+    const row=l=>l.k==="say"?`<div class="wgsay${l.p===me?" mine":""}"><span class="wgav">${l.p+1}</span><div><b>${esc(g.ps[l.p].name)}</b><p>${esc(l.text)}</p></div></div>`
+      :`<p class="wgsys ${l.k}">${esc(l.text)}</p>`;
+    return ks.map(d=>d===g.day||g.phase==="end"&&d===ks[ks.length-1]?days[d].map(row).join(""):`<details class="wgold"><summary>第 ${d} 天的记录（${days[d].filter(l=>l.k==="say").length} 条发言）</summary>${days[d].map(row).join("")}</details>`).join("")})();
+  /* 行动区 */
+  let act="";const myTurn=g.phase==="day"&&(g.speak.lastMe||(alive&&g.speak.order[g.speak.i]===me));
+  WG_PICK=null;
+  if(g.phase==="end"){act=wgEndHTML(g)}
+  else if(!alive&&!myTurn){act=`<div class="card"><p class="note">你已经出局了。可以看着其他人把这局打完。</p><button class="btn" id="wgauto">观战到结束</button></div>`}
+  else if(g.phase==="night"){
+    if(g.step==="kill"){WG_PICK={ok:i=>g.ps[i].alive&&g.ps[i].role!=="wolf",val:WG_COMPOSE.t};
+      act=`<div class="card wgact"><p class="lbl">🌙 狼人请睁眼 · 选一个人刀掉</p><p class="hint">点上面的座位选人。刀掉预言家、女巫这种神职，对狼人最有利。</p><button class="btn" id="wgok" ${WG_COMPOSE.t==null?"disabled":""}>${WG_COMPOSE.t==null?"先选人":"刀 "+(WG_COMPOSE.t+1)+" 号"}</button></div>`}
+    else if(g.step==="witch"){const v=g.night.kill;WG_PICK=WG_COMPOSE.claim==="poison"?{ok:i=>g.ps[i].alive&&i!==me,val:WG_COMPOSE.t}:null;
+      act=`<div class="card wgact"><p class="lbl">🧪 女巫请睁眼</p><p class="note">今晚被狼人刀的是：<b>${v!=null?wgName(g,v):"没有人"}</b></p>
+        <div class="chips" id="wgw">${g.potion.save&&v!=null?`<button data-a="save" class="${WG_COMPOSE.claim==="save"?"on":""}">用解药救 ${v+1} 号</button>`:""}${g.potion.poison?`<button data-a="poison" class="${WG_COMPOSE.claim==="poison"?"on":""}">用毒药毒一个人</button>`:""}<button data-a="none" class="${WG_COMPOSE.claim==="none"?"on":""}">今晚不用药</button></div>
+        ${WG_COMPOSE.claim==="poison"?`<p class="hint">点上面的座位选要毒的人。</p>`:""}
+        <button class="btn" id="wgok" ${WG_COMPOSE.claim==="poison"&&WG_COMPOSE.t==null?"disabled":""}>确定</button></div>`}
+    else if(g.step==="seer"){WG_PICK={ok:i=>g.ps[i].alive&&i!==me&&!g.checks.some(k=>k.t===i),val:WG_COMPOSE.t};
+      act=`<div class="card wgact"><p class="lbl">🔮 预言家请睁眼 · 查验一个人</p><p class="hint">点上面的座位选人，结果只有你能看到。</p><button class="btn" id="wgok" ${WG_COMPOSE.t==null?"disabled":""}>${WG_COMPOSE.t==null?"先选人":"查验 "+(WG_COMPOSE.t+1)+" 号"}</button></div>`}}
+  else if(myTurn){const C=WG_COMPOSE,isSeer=my.role==="seer",isWitch=my.role==="witch",last=!!g.speak.lastMe;
+    WG_PICK=(C.op!=="none"&&C.pickFor!=="fake")||C.pickFor==="fake"?{ok:i=>g.ps[i].alive&&i!==me,val:C.pickFor==="fake"?C.ft:C.t}:null;
+    act=`<div class="card wgact"><p class="lbl">🗣 ${last?"轮到你说遗言":"轮到你发言了"}</p>
+      <p class="hint">身份要不要亮</p><div class="chips" id="wgc"><button data-c="none" class="${C.claim==="none"?"on":""}">不亮身份</button><button data-c="seer" class="${C.claim==="seer"?"on":""}">${isSeer?"跳预言家，报查验":"假跳预言家"}</button>${isWitch?`<button data-c="witch" class="${C.claim==="witch"?"on":""}">跳女巫</button>`:""}</div>
+      ${C.claim==="seer"&&!isSeer?`<div class="wgfake"><span>说我验了</span><button class="mini${C.pickFor==="fake"?" on":""}" id="wgft">${C.ft!=null?C.ft+1+" 号":"点这里再选座位"}</button><span>是</span><div class="chips" id="wgfw"><button data-w="1" class="${C.fw?"on":""}">狼人</button><button data-w="0" class="${C.fw?"":"on"}">好人</button></div></div>`:""}
+      <p class="hint">表个态</p><div class="chips" id="wgo"><button data-o="none" class="${C.op==="none"?"on":""}">不表态</button><button data-o="sus" class="${C.op==="sus"?"on":""}">怀疑某人</button><button data-o="good" class="${C.op==="good"?"on":""}">保某人是好人</button></div>
+      ${C.op!=="none"?`<p class="hint">${C.t!=null?`对象：<b>${C.t+1} 号</b>（可以点座位换人）`:"点上面的座位选人"}</p>`:""}
+      <button class="btn" id="wgok" ${(C.op!=="none"&&C.t==null)||(C.claim==="seer"&&!isSeer&&C.ft==null)?"disabled":""}>发言</button></div>`}
+  else if(g.phase==="vote"){WG_PICK={ok:i=>g.ps[i].alive&&i!==me,val:WG_COMPOSE.t};
+    act=`<div class="card wgact"><p class="lbl">🗳 投票 · 把票投给你认为是狼的人</p><p class="hint">点上面的座位选人。</p>
+      <div class="row"><button class="btn" id="wgok" ${WG_COMPOSE.t==null?"disabled":""}>${WG_COMPOSE.t==null?"先选人":"投 "+(WG_COMPOSE.t+1)+" 号"}</button><button class="btn ghost" id="wgabs">弃票</button></div></div>`}
+  const an=WG_SHOW_AN&&g.phase!=="end"&&my.role!=="wolf"?(()=>{const s=wgSus(g,me);const top=wgAlive(g).filter(i=>i!==me).sort((a,b)=>s[b]-s[a]).slice(0,3);
+    return `<div class="card wgan"><p class="lbl">💡 局势分析（只用你知道的信息算）</p>${top.map(i=>`<div class="wgbar"><span>${i+1}号 ${esc(g.ps[i].name)}</span><div><i style="width:${Math.round(s[i]*100)}%"></i></div><b>${Math.round(s[i]*100)}%</b></div>`).join("")}
+      <p class="hint">这是“是狼的可能性”。算法：把所有可能的狼人组合列出来，去掉和查验、发言、死亡信息矛盾的，再看谁出现得最多。</p></div>`})():"";
+  body.innerHTML=`${head}<div class="wgtop"><span class="wgph">${phaseTx}</span><span class="wgme">${priv}</span></div>
+    <div class="wgseats">${g.ps.map((p,i)=>seat(i)).join("")}</div>
+    <p class="hint wgtip">${WG_PICK?"点亮的座位可以选":"点座位可以给别人做标记：好人 ✓ / 狼 🐺 / 存疑 ?"}</p>
+    ${g.phase==="night"||g.phase==="vote"?act:""}<div class="card wgfeed" id="wgfeed">${feed}</div>${an}${g.phase==="night"||g.phase==="vote"?"":act}
+    ${g.phase!=="end"?`<div class="row wgfoot">${my.role!=="wolf"?`<button class="mini" id="wgan">${WG_SHOW_AN?"收起分析":"💡 帮我分析"}</button>`:""}<button class="mini" id="wgquit">放弃这局</button></div>`:""}`;
+  bindLogicModes();bindWgSub();
+  const f=$("#wgfeed");if(f)f.scrollTop=f.scrollHeight;
+  const done=()=>{WG_COMPOSE={claim:"none",op:"none",t:null,ft:null,fw:true};wgSave(g);thWolf()};
+  body.querySelectorAll(".wgseat").forEach(b=>b.onclick=()=>{const i=+b.dataset.i;
+    if(WG_PICK){if(!WG_PICK.ok(i))return;if(WG_COMPOSE.pickFor==="fake"){WG_COMPOSE.ft=i;WG_COMPOSE.pickFor=null}else WG_COMPOSE.t=i;buzz(8);thWolf();return}
+    if(i===me||known(i))return;const order=[undefined,"good","wolf","q"];g.marks[i]=order[(order.indexOf(g.marks[i])+1)%order.length];if(!g.marks[i])delete g.marks[i];wgSave(g);thWolf()});
+  const ok=$("#wgok"),C=WG_COMPOSE;
+  if(g.phase==="night"&&ok){
+    if(g.step==="witch")body.querySelectorAll("#wgw button").forEach(b=>b.onclick=()=>{C.claim=b.dataset.a;C.t=null;thWolf()});
+    ok.onclick=()=>{if(g.step==="kill")wgMyNight(g,{t:C.t});else if(g.step==="witch")wgMyNight(g,{save:C.claim==="save",poison:C.claim==="poison"?C.t:null});else wgMyNight(g,{t:C.t});done()}}
+  if(myTurn&&g.phase==="day"){
+    body.querySelectorAll("#wgc button").forEach(b=>b.onclick=()=>{C.claim=b.dataset.c;if(C.claim==="seer"&&my.role!=="seer"&&C.ft==null)C.pickFor="fake";thWolf()});
+    body.querySelectorAll("#wgo button").forEach(b=>b.onclick=()=>{C.op=b.dataset.o;C.pickFor=null;if(C.op==="none")C.t=null;thWolf()});
+    body.querySelectorAll("#wgfw button").forEach(b=>b.onclick=()=>{C.fw=b.dataset.w==="1";thWolf()});
+    if($("#wgft"))$("#wgft").onclick=()=>{C.pickFor="fake";thWolf()};
+    ok.onclick=()=>{wgMySpeech(g,{claim:C.claim==="none"?null:C.claim,fake:C.claim==="seer"&&my.role!=="seer"?{t:C.ft,wolf:C.fw}:null,op:C.op==="none"?null:{t:C.t,kind:C.op}});done()}}
+  if(g.phase==="vote"&&ok){ok.onclick=()=>{wgVote(g,C.t);done()};$("#wgabs").onclick=()=>{wgVote(g,null);done()}}
+  if($("#wgauto"))$("#wgauto").onclick=()=>{wgAuto(g);done()};
+  if($("#wgan"))$("#wgan").onclick=()=>{WG_SHOW_AN=!WG_SHOW_AN;thWolf()};
+  if($("#wgquit"))$("#wgquit").onclick=()=>{const q=$("#wgquit");if(q.dataset.sure!=="1"){q.dataset.sure="1";q.textContent="确定放弃？";return}store.set("lgf-wg",null);thWolf()};
+  if(g.phase==="end"){wgScore(g);bindWgEnd(g)}}
+function wgScore(g){if(g.scored)return;g.scored=1;const my=g.ps[g.me],win=(g.result==="good")===(my.role!=="wolf");
+  const hits=g.myVotes.filter(v=>v.wolf).length,sc=win?100:Math.min(70,30+hits*20);
+  addScore("logic",sc);logEvent("logic",{kind:"wolfgame",ok:win,q:"狼人杀 · "+WG_ROLE[my.role],score:sc});if(today().think==null)mark("think","logic");gainXP("think",win?8:3);if(win)buzz([10,40,10,40,10]);wgSave(g)}
+function wgEndHTML(g){const my=g.ps[g.me],win=(g.result==="good")===(my.role!=="wolf");
+  const tl=g.truth.map(t=>`<li><b>第 ${t.night} 晚</b>：狼人刀了 ${t.kill!=null?wgName(g,t.kill):"没人"}${t.save!=null?`，女巫救了他`:""}${t.poison!=null?`，女巫毒了 ${wgName(g,t.poison)}`:""}${t.check?`，预言家验了 ${t.check.t+1} 号（${t.check.wolf?"狼":"好人"}）`:""}</li>`).join("");
+  const hits=g.myVotes.filter(v=>v.wolf).length;
+  return `<div class="card m-think wgend ${win?"win":"lose"}"><h2>${win?"🎉 你赢了！":"这局输了"}</h2><p class="note">${g.result==="good"?"好人阵营胜利":"狼人阵营胜利"} · 你是 ${WG_ROLE[my.role]}${my.role==="wolf"?"":` · 你投了 ${g.myVotes.length} 次票，其中 ${hits} 次投中狼人`}</p>
+    <p class="lbl">真相</p><ul class="wgtl">${tl}</ul>
+    <div id="wgrev">${g.review?`<div class="wgrevbox">${md(g.review)}</div>`:""}</div>
+    <div class="row">${apiReady()&&!g.review?`<button class="btn ghost" id="wgai">🤖 AI 复盘这局</button>`:""}<button class="btn" id="wgnew">再来一局</button></div></div>`}
+function bindWgEnd(g){$("#wgnew").onclick=()=>{store.set("lgf-wg",null);thWolf()};
+  const b=$("#wgai");if(b)b.onclick=async()=>{b.disabled=true;b.textContent="AI 正在复盘…";
+    const roles=g.ps.map((p,i)=>`${i+1}号${p.name}=${WG_ROLE[p.role]}`).join("，"),log=g.log.map(l=>`[第${l.d}天]`+(l.k==="say"?`${l.p+1}号：`:"")+l.text).join("\n");
+    try{const r=await callApi([{role:"user",content:`你是狼人杀教练，用中文给玩家复盘一局 7 人狼人杀（2狼、预言家、女巫、3村民）。玩家是 ${g.me+1} 号，身份 ${WG_ROLE[g.ps[g.me].role]}，结果：${g.result==="good"?"好人胜":"狼人胜"}。\n真实身份：${roles}\n夜里真相：${JSON.stringify(g.truth)}\n全程记录：\n${log}\n\n请写：1）这局的转折点是哪一刻；2）玩家做得好的一步；3）玩家可以改进的一步，以及当时场上有哪条线索能帮他看出真相；4）一条下次能直接用的小技巧。简洁，总共不超过 250 字，用 markdown 小标题或列表。`}],null,.5,{model:genModel()});
+      g.review=cleanAI(r);wgSave(g);thWolf()}catch(e){b.disabled=false;b.textContent="🤖 AI 复盘这局";toast(errText(e))}}}
 
 /* ================= ROUTER ================= */
 /* ================= 成长：修炼线、等级、成就、反馈 ================= */
@@ -3370,7 +3667,7 @@ function route(){
   VIEWS[view](arg);window.scrollTo(0,0)}
 app.addEventListener("animationend",e=>{if(e.target.parentElement===app)app.classList.remove("enter")});
 /* ================= App 外壳：安装、离线、云同步 ================= */
-const APP_VER="2026.11.17";
+const APP_VER="2026.11.17b";
 const IS_WEB=location.protocol==="https:"||location.hostname==="localhost"||location.hostname==="127.0.0.1";
 const IS_APP=(()=>{try{return matchMedia("(display-mode: standalone)").matches||navigator.standalone===true}catch(e){return false}})();
 let INSTALL_EVT=null;
