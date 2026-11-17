@@ -264,6 +264,15 @@ details.card summary::-webkit-details-marker{display:none}
 .tw{color:var(--eq);font-family:var(--display)}
 .kitem{display:flex;flex-direction:column;gap:3px;text-align:left;width:100%;border-radius:18px;padding:14px 16px;font:inherit;color:inherit;cursor:pointer;transition:transform .15s var(--ease)}
 .kitem .kt{font-weight:700}
+.lmode{margin-bottom:4px}.pzlines{display:flex;flex-direction:column;gap:8px;margin:12px 0}
+.pzl{display:flex;gap:10px;align-items:flex-start;line-height:1.6}.pzw{flex:none;min-width:3.2em;font-weight:700;color:var(--think)}
+.pzl.wf .pzw{display:inline-flex;align-items:center;justify-content:center;min-width:2.6em;height:2.6em;border-radius:50%;background:var(--think-soft);font-size:13px}
+.pzt{flex:1;min-width:0;padding-top:.2em}.pzinfo{background:var(--think-soft);border-radius:10px;padding:8px 10px}
+.pzseats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.pzseats .opt{justify-content:center;text-align:center;padding:14px 6px}.seat{font-weight:700;font-size:16px}
+.pzwhy p{margin:6px 0;line-height:1.7}
+.soupqa .sq{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--line)}.soupqa .sq:last-child{border-bottom:0}
+.sqq{flex:1;min-width:0}.sa{font-weight:700;border-radius:999px;padding:2px 10px;font-size:13px}.sa.y{background:var(--eq-soft);color:var(--eq)}.sa.n{background:var(--warn-soft);color:var(--warn)}.sa.x{background:var(--line);color:var(--muted)}.sa.m{background:var(--es-soft);color:var(--es)}
+.skey{font-size:12px;color:var(--gold);font-weight:700}.sq.g .sv{font-weight:700;color:var(--think)}.sq.g .hint{flex-basis:100%}
 ol.steps{padding-left:1.3em;margin:8px 0;display:flex;flex-direction:column;gap:6px;line-height:1.6}#syncst .spin{display:inline-block;vertical-align:-2px;margin-right:4px}
 .ckl{display:flex;gap:8px;align-items:flex-start;font-size:13px;margin:8px 0;line-height:1.5}.ckl input{margin-top:3px;width:auto}
 .cbar{display:flex;gap:8px;justify-content:space-between;align-items:center;margin-bottom:8px}.cbar .cset{max-width:62%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -451,9 +460,9 @@ nav a.ready .g::after{content:"";position:absolute;top:4px;right:calc(50% - 20px
 <script>
 /* ================= THEMES ================= */
 const TH={
- eq:["邻里","客户","员工","家人","伴侣","朋友","办事求人","聚会应酬","群聊网络","安慰","拒绝","道歉"],
- es:["店铺生意","看病买药","银行缴费","租房住房","出行打车","餐厅点餐","超市购物","闲聊交友","手机网络","办手续","家庭孩子","天气心情"],
- dec:["生意经营","花钱理财","家庭决策","人际关系","时间精力","健康习惯","学习成长"],
+ eq:["邻里","客户","员工","家人","心动女生","约会","朋友","办事求人","聚会应酬","群聊网络","安慰","拒绝","道歉"],
+ es:["店铺生意","看病买药","银行缴费","租房住房","出行打车","餐厅点餐","超市购物","闲聊交友","约会交友","手机网络","办手续","天气心情"],
+ dec:["生意经营","花钱理财","恋爱交友","家庭决策","人际关系","时间精力","健康习惯","学习成长"],
  logic:["生活说法","广告宣传","网络传言","生意判断","数字统计"],
  know:["历史","科学","心理学","健康常识","理财常识","秘鲁与拉美","科技","思维方法"]
 };
@@ -635,7 +644,10 @@ function shuffled(n){const a=[...Array(n).keys()];for(let i=n-1;i>0;i--){const j
 function shufOpts(o){if(!o||!Array.isArray(o.opts))return o;const key="ans" in o?"ans":"bad" in o?"bad":null;if(!key||!Number.isInteger(+o[key]))return o;
   const ord=shuffled(o.opts.length),r={...o,opts:ord.map(i=>o.opts[i]),[key]:ord.indexOf(+o[key])};if(Array.isArray(o.notes)&&o.notes.length===o.opts.length)r.notes=ord.map(i=>o.notes[i]);return r}
 function shufItem(it){it=shufOpts(it);if(Array.isArray(it.quiz))it={...it,quiz:it.quiz.map(shufOpts)};return it}
-function poolList(pool,theme,filter){return pool.filter(filter||(x=>theme==="随机"||x.th===theme))}
+const FAM_TH=new Set(["伴侣","家庭孩子","孩子教育"]);
+function isFam(x){if(!x||typeof x!=="object")return false;if(FAM_TH.has(x.th))return true;if(/^(老婆|孩子|孩子的老师)$/.test(String(x.who||"")))return true;
+  let j="";try{j=JSON.stringify(x)}catch(e){}return /老婆/.test(j)||(/孩子|女儿|我儿子/.test(j)&&/^(家庭决策|邻里|安慰|办事求人|家庭生活)$/.test(String(x.th||"")))}
+function poolList(pool,theme,filter){const f=filter||(x=>theme==="随机"||x.th===theme);return pool.filter(x=>!isFam(x)&&f(x))}
 function poolDone(pool,k){const done=new Set(store.get("lgf-done-"+k,[]));return pool.filter(x=>done.has(itemKey(x))).length}
 function pickBuiltin(pool,k,theme,filter,allowReset=true){
   let list=poolList(pool,theme,filter);
@@ -699,7 +711,7 @@ function errText(e){
   if(e.code==="empty")return"AI 只返回了思考过程，没给出答案，再试一次。如果经常这样，可以在设置里换成不带“深度思考”的模型（比如 deepseek-chat）。";return"未知错误"}
 let ctl=null;
 function newCtl(){if(ctl)ctl.abort();ctl=new AbortController();return ctl}
-const ME="用户是一位在秘鲁利马生活、开批发零售店的华人老板，有家庭，日常要和顾客、员工、邻居、家人、秘鲁本地人打交道。";
+const ME="用户是一位24岁的华人男生，单身，在秘鲁利马生活并经营一家批发零售店，日常要和顾客、员工、邻居、朋友、秘鲁本地人打交道，家人在国内；他也在想怎么认识女生、找到女朋友。";
 
 /* "AI 出题 or 题库" — the one generator all modules share */
 /* ================= 出题任务：后台进行、预取下一题 ================= */
@@ -710,7 +722,7 @@ const READY=new Set();
 const genModel=()=>{const c=cfg();return (c.fast||"").trim()||c.model.trim()};
 const jobVisible=k=>!!document.querySelector(`#gbox[data-k="${k}"]`);
 function openJob(k){const [v,s,m]=JOB_VIEW[k]||[];if(!v)return;
-  if(v==="think")sub.think=s;if(m)store.set("lgf-ana-mode",m);
+  if(v==="think")sub.think=s;if(m)store.set(s==="logic"?"lgf-logic-mode":"lgf-ana-mode",m);
   const h="#"+v+(v==="es"?"/trans":v==="know"?"/today":"");if(location.hash===h)route();else location.hash=h}
 function toastAct(msg,label,fn,ms=9000){toast(msg,ms);const t=$("#toast");if(!t)return;
   t.innerHTML=`<span>${esc(msg)}</span><button type="button" class="tact">${esc(label)}</button>`;
@@ -880,7 +892,7 @@ function jsonSpec(mod){const k=Object.keys(DIMS[mod]);
 const REF_SPEC=`"ref":{"a":"一句话","b":"一句话","alts":[["2-5字策略名","参考答案","为什么好"],["","",""]]}`;
 
 /* theme bar: choosing only selects; the button generates */
-function genLabel(k){if(k==="know"){const t=kSel();return t==="随机"?"随机板块":t.startsWith("组:")?t.slice(2)+"（随机板块）":t}const t=getTheme(k);return t==="随机"?"随机主题":t}
+function genLabel(k){if(k==="wolf"||k==="liar"||k==="soup")return LOGIC_MODES[k];if(k==="know"){const t=kSel();return t==="随机"?"随机板块":t.startsWith("组:")?t.slice(2)+"（随机板块）":t}const t=getTheme(k);return t==="随机"?"随机主题":t}
 function nxLabel(unit){return apiReady()&&srcPref()==="ai"?(unit==="篇"?"生成一篇":"生成新题"):"下一"+unit}
 function genbar(k,unit="题"){const jk=k==="es"?"tr":k==="ana"?"ana-"+anaMode():k;return `<div class="genbar"><span class="gsel">已选：<b id="gsel">${esc(genLabel(k))}</b></span>${apiReady()?`<button class="srcbtn" id="srcbtn" title="切换出题来源">${srcPref()==="pool"?"题库优先":"AI 出题"} ⇄</button>`:""}<button class="btn" id="nx" data-unit="${unit}">${nxLabel(unit)}</button></div><div id="gbox" data-k="${jk}" hidden></div>`}
 function genSel(k){const g=$("#gsel");if(g)g.textContent=genLabel(k)}
@@ -1221,7 +1233,7 @@ function esTest(){
 /* ---- 思维 ---- */
 VIEWS.think=()=>{
   app.innerHTML=`<div class="view m-think"><div class="head"><div><h1>思维训练</h1><p class="sub">想清楚，再决定</p></div></div>
-   <div class="seg"><button data-s="dec" class="${sub.think==="dec"?"on":""}">决策案例</button><button data-s="logic" class="${sub.think==="logic"?"on":""}">逻辑找茬</button><button data-s="ana" class="${sub.think==="ana"?"on":""}">分析</button></div>
+   <div class="seg"><button data-s="dec" class="${sub.think==="dec"?"on":""}">决策案例</button><button data-s="logic" class="${sub.think==="logic"?"on":""}">逻辑推理</button><button data-s="ana" class="${sub.think==="ana"?"on":""}">分析</button></div>
    <div id="body" class="view"></div></div>`;
   app.querySelectorAll(".seg button").forEach(b=>b.onclick=()=>{sub.think=b.dataset.s;VIEWS.think()});
   ({dec:thDec,logic:thLogic,ana:thAna})[sub.think]()};
@@ -1251,21 +1263,22 @@ const DISTRACT=`干扰项（错误选项）的要求，非常重要：
 - notes 数组和 opts 一一对应：正确项写空字符串，每个错误项用一句话写出“它为什么看起来对、错在哪里”。`;
 const LOGIC_GEN=(th,avoid)=>`出一道“逻辑找茬”选择题，主题：${th}，这次的漏洞类型用：${rnd(FLAVOR.logic)}。给一段生活中常见的说法（广告、传言、日常推理、生意判断），里面藏着一个逻辑漏洞（如以偏概全、因果倒置、幸存者偏差、非此即彼、偷换概念、诉诸权威、样本太少等）。${ME}贴近他的生活。避免和这些重复：${avoid||"无"}。\n错误选项可以是其他谬误名称，或看似合理但抓错重点的分析。\n${DISTRACT}\n只回复JSON：{"text":"那段说法","q":"问题","opts":["选项A","选项B","选项C","选项D"],"ans":正确选项序号0到3,"why":"中文解释，点出漏洞名称","notes":["","错误项的迷惑点","错误项的迷惑点","错误项的迷惑点"]}`;
 function thLogic(){
+  const lm=logicMode();if(lm!=="find")return lm==="soup"?thSoup():thPuzzle(lm);
   const q=curItem("logic",LOGIC),body=$("#body"),s=S(),acc=s.scores.logic.length?Math.round(s.scores.logic.reduce((a,b)=>a+b,0)/s.scores.logic.length):null;
-  body.innerHTML=`${chipsHTML("logic")}${genbar("logic")}${errNote(q)}<div class="card m-think"><div class="row" style="justify-content:space-between"><span class="lbl">这段话有问题吗？</span>${srcTag(q)}</div>
+  body.innerHTML=`${logicModesHTML("find")}${chipsHTML("logic")}${genbar("logic")}${errNote(q)}<div class="card m-think"><div class="row" style="justify-content:space-between"><span class="lbl">这段话有问题吗？</span>${srcTag(q)}</div>
    <p class="essay">“${esc(String(q.text).replace(/^[“"]|[”"]$/g,""))}”</p><p class="note"><b>${esc(q.q)}</b></p></div>
    <div class="opts">${q.opts.map((o,i)=>`<button class="opt" data-i="${i}"><span class="k">${"ABCD"[i]}</span>${esc(o)}</button>`).join("")}</div>
    <div id="ex"></div><button class="btn ghost" id="nx2">下一题</button>
    <p class="hint">${acc!=null?`累计正确率 ${acc}%（${s.scores.logic.length} 题）· `:""}${apiHint()}</p><div id="rv" hidden></div>`;
   const nx=async()=>{const n=await nextItem({k:"logic",theme:getTheme("logic"),pool:LOGIC,prompt:LOGIC_GEN,check:r=>r&&r.text&&Array.isArray(r.opts)&&r.opts.length>=3&&Number.isInteger(+r.ans),btn:$("#nx"),box:$("#gbox")});if(n&&location.hash.startsWith("#think"))thLogic()};
-  bindChips(body,()=>genSel("logic"));bindGen(nx);
+  bindChips(body,()=>genSel("logic"));bindGen(nx);bindLogicModes();
   body.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{const i=+b.dataset.i,ans=+q.ans,ok=i===ans;
     body.querySelectorAll(".opt").forEach((x,j)=>{x.disabled=true;x.classList.add(j===ans?"good":j===i?"bad":"dim2")});
     $("#ex").innerHTML=`<div class="card m-think"><h2>${ok?"答对了 ✓":"正确答案是 "+"ABCD"[ans]}</h2>${!ok&&q.notes&&q.notes[i]?`<p class="note bad"><b>你选的 ${"ABCD"[i]}：</b>${esc(q.notes[i])}</p>`:""}<p class="note">${esc(q.why)}</p></div>`;
     addScore("logic",ok?100:0);logEvent("logic",{ok,th:q.th,why:short(q.why,50),score:ok?100:0});if(today().think==null)mark("think","logic");addSeen("logic",String(q.text).slice(0,30))})}
 
 /* ---- 分析 ---- */
-TH.ana=["生意经营","员工团队","客户","家庭生活","孩子教育","健康习惯","人际关系","学习成长","社会现象"];
+TH.ana=["生意经营","员工团队","客户","恋爱交友","家庭生活","健康习惯","人际关系","学习成长","社会现象"];
 const ANA_DIMS={
  det:{ask:"问得准",eff:"不绕远",evidence:"有依据",conclusion:"结论对"},
  split:{mece:"不重不漏",key:"抓住关键",depth:"拆得够细",prio:"有优先级"},
@@ -2675,6 +2688,175 @@ VIEWS.me=()=>{
   $("#imp").onclick=()=>{const bk=$("#bk");if(bk.hidden||!bk.value.trim()){bk.hidden=false;bk.value="";bk.focus();$("#bkst").textContent="";return}
     try{restore(bk.value);bk.hidden=true}catch(e){$("#bkst").textContent="内容格式不对，请粘贴完整的备份。"}}};
 
+const WOLF=[{"th": "狼人杀", "t": "两个预言家", "lv": "入门", "rules": "", "lines": [["1号", "我是预言家，昨晚验了3号，他是狼人。"], ["2号", "我是预言家，昨晚验了1号，他是狼人。"], ["3号", "我是好人。"], ["4号", "2号是好人。"], ["5号", "我是村民，没什么信息。"]], "q": "谁是狼人？", "opts": ["1号", "2号", "3号", "4号", "5号"], "ans": 0, "why": "1号和2号都说自己是预言家，可真预言家只有1个，好人又不会说谎，所以两人里一定有一个是狼人。\n假设1号是真预言家：那3号是狼人，2号就是好人。可好人2号也说自己是预言家，等于出现两个真预言家，矛盾。\n所以1号是狼人。验证：2号是真预言家，他验出1号是狼，对得上；3、4、5号的话也都成立。"}, {"th": "狼人杀", "t": "刀口说话", "lv": "入门", "rules": "昨晚6号被狼人杀了。本局狼人不会杀自己。", "lines": [["1号", "我是预言家，昨晚验了5号，是好人。"], ["2号", "我是预言家，昨晚验了6号，他是狼人。"], ["3号", "我相信1号是真预言家。"], ["4号", "5号是好人。"], ["5号", "我是村民。"]], "q": "谁是狼人？", "opts": ["1号", "2号", "3号", "4号", "5号", "6号"], "ans": 1, "why": "关键在“6号是被狼人杀的”：狼人不会杀自己，所以6号一定是好人。\n2号却说验出6号是狼人，这句话是假的。好人不说谎，所以2号是狼人。\n验证：1号是真预言家，5号确实是好人；3、4、5号的话都成立。"}, {"th": "狼人杀", "t": "站边", "lv": "入门", "rules": "", "lines": [["1号", "我是预言家，昨晚验了4号，是好人。"], ["2号", "1号在说谎。"], ["3号", "2号是狼人。"], ["4号", "3号是好人。"], ["5号", "我和4号都是好人。"]], "q": "谁是狼人？", "opts": ["1号", "2号", "3号", "4号", "5号"], "ans": 1, "why": "先看2号和3号：2号说1号说谎，3号说2号是狼。\n假设2号是好人：那1号在说谎，1号就是狼人；可这样3号是好人，他说“2号是狼人”就是假话，矛盾。\n所以2号是狼人。验证：1号是真预言家，4号确实是好人；3、4、5号的话都成立。"}, {"th": "狼人杀", "t": "跳预言家的人", "lv": "进阶", "rules": "", "lines": [["1号", "我是预言家，昨晚验了3号，是好人。"], ["2号", "我是预言家，昨晚验了5号，是狼人。"], ["3号", "1号是真预言家。"], ["4号", "5号是好人。"], ["5号", "4号是好人。"], ["6号", "我是村民。"]], "q": "谁是狼人？", "opts": ["1号", "2号", "3号", "4号", "5号", "6号"], "ans": 1, "why": "1号和2号对跳预言家，狼人就在他们两个之中。\n假设2号是真预言家：5号是狼人。但这样1号就是好人，好人冒充预言家，矛盾。\n所以2号是狼人。验证：1号是真预言家，3号确实是好人；3号说1号是真预言家，对；4、5号互相说是好人，也对。"}, {"th": "狼人杀", "t": "你们说谁", "lv": "入门", "rules": "", "lines": [["1号", "2号是狼人。"], ["2号", "3号是狼人。"], ["3号", "我和1号都是好人。"], ["4号", "5号是好人。"], ["5号", "4号是好人。"]], "q": "谁是狼人？", "opts": ["1号", "2号", "3号", "4号", "5号"], "ans": 1, "why": "1号和2号在互相“指”下一个人。\n假设1号是狼人：那2号是好人，他说3号是狼，就有两个狼了，矛盾。所以1号是好人，他的话为真：2号是狼人。\n验证：3号说自己和1号都是好人，对；4、5号的话也都对。"}, {"th": "狼人杀", "t": "女巫的解药", "lv": "进阶", "rules": "3号是女巫，已经亮明身份，大家都确认她是好人。本局狼人不会杀自己。", "lines": [["3号", "昨晚狼人杀的是4号，我用解药把他救了。"], ["1号", "我是预言家，昨晚验了4号，他是狼人。"], ["2号", "我是预言家，昨晚验了1号，他是狼人。"], ["4号", "1号在乱说。"], ["5号", "2号是好人。"], ["6号", "我是村民。"]], "q": "谁是狼人？", "opts": ["1号", "2号", "3号", "4号", "5号", "6号"], "ans": 0, "why": "女巫是好人，她说昨晚狼人杀的是4号。狼人不会杀自己，所以4号是好人。\n1号说验出4号是狼人，这是假话，所以1号是狼人。\n验证：2号是真预言家，他验出1号是狼，对得上；4号说1号乱说，对；5号说2号是好人，也对。"}, {"th": "狼人杀", "t": "两晚的验人", "lv": "进阶", "rules": "", "lines": [["1号", "我是预言家。第一晚验了2号是好人，第二晚验了5号是好人。"], ["4号", "我是预言家。第一晚验了5号是狼人，第二晚验了1号是狼人。"], ["2号", "4号是狼人。"], ["3号", "我是村民。"], ["5号", "1号是好人。"], ["6号", "2号说的是真的。"]], "q": "谁是狼人？", "opts": ["1号", "2号", "3号", "4号", "5号", "6号"], "ans": 3, "why": "看4号的话：他说5号是狼人，又说1号也是狼人。可本局只有1个狼人，这两句不可能同时成立，所以4号在说谎，4号就是狼人。\n验证：1号是真预言家，2号、5号确实是好人；2号说4号是狼，对；5号、6号的话也都对。"}, {"th": "狼人杀", "t": "谁信谁", "lv": "挑战", "rules": "", "lines": [["1号", "我是预言家，昨晚验了5号，是好人。"], ["2号", "3号和5号里有一个是狼人。"], ["3号", "我是预言家，昨晚验了2号，他是狼人。"], ["4号", "1号说的是真的。"], ["5号", "过。"]], "q": "谁是狼人？", "opts": ["1号", "2号", "3号", "4号", "5号"], "ans": 2, "why": "1号和3号对跳预言家，狼人在他们两个之中。\n假设1号是狼人：3号就是真预言家，2号是狼人，两个狼人，矛盾。\n所以3号是狼人。验证：1号是真预言家，5号是好人；2号说3号和5号里有一个狼，对（是3号）；4号说1号说的是真的，也对。"}];
+const LIAR=[{"th": "谁在说谎", "t": "少了一百块", "lv": "入门", "ctx": "晚上对账，收银台少了100索尔。当班的三个员工各说了一句话。", "rule": "三句话里只有一句是真的。", "lines": [["阿芳", "是小陈拿的。"], ["小陈", "不是我。"], ["阿明", "也不是我。"]], "q": "钱是谁拿的？", "opts": ["阿芳", "小陈", "阿明"], "ans": 2, "why": "小陈说“不是我”，阿芳说“是小陈”，这两句正好相反，必有一真一假。\n既然只有一句真话，那句真话就在这两句里面，阿明那句一定是假的。\n阿明说“不是我”是假的，所以是阿明拿的。验证：阿芳假、小陈真、阿明假，正好一句真话。"}, {"th": "谁在说谎", "t": "谁吃了蛋糕", "lv": "入门", "ctx": "冰箱里的蛋糕被人偷吃了，四个室友各说了一句。", "rule": "四个人里只有一个人说了假话。", "lines": [["阿杰", "是小林吃的。"], ["小林", "是大伟吃的。"], ["阿明", "不是我吃的。"], ["大伟", "小林在说谎。"]], "q": "蛋糕是谁吃的？", "opts": ["阿杰", "小林", "阿明", "大伟"], "ans": 1, "why": "小林说“是大伟”，大伟说“小林在说谎”，这两句一真一假，所以唯一的假话就在他俩之中。\n那阿杰和阿明说的都是真话。阿杰说“是小林吃的”，所以答案是小林。\n验证：小林说“是大伟”是假话，大伟说小林说谎是真话，正好一句假话。"}, {"th": "谁在说谎", "t": "谁去约会了", "lv": "入门", "ctx": "周五晚上，三个室友里有一个人偷偷去约会了。被问起时，三个人这样说。", "rule": "三句话里只有一句是真的。", "lines": [["阿杰", "去约会的不是我。"], ["小林", "是阿杰。"], ["大伟", "不是小林。"]], "q": "谁去约会了？", "opts": ["阿杰", "小林", "大伟"], "ans": 1, "why": "阿杰说“不是我”，小林说“是阿杰”，两句正好相反，必有一真一假。\n唯一的真话在这两句里，所以大伟那句是假的：“不是小林”是假的，就是小林去约会了。\n验证：阿杰的话真、小林的话假、大伟的话假，正好一句真话。"}, {"th": "谁在说谎", "t": "诚实人和说谎人", "lv": "进阶", "ctx": "店里来了三个人：甲、乙、丙。他们每人要么是诚实人（只说真话），要么是说谎人（只说假话）。", "rule": "", "lines": [["甲", "我们三个都是说谎人。"], ["乙", "我们三个里，恰好有一个诚实人。"], ["丙", "（没说话）"]], "q": "丙是什么人？", "opts": ["诚实人", "说谎人", "无法确定"], "ans": 1, "why": "先看甲：如果甲是诚实人，他说的“三个都是说谎人”就包括他自己，矛盾。所以甲是说谎人，他的话是假的：三个人里至少有一个诚实人。\n再看乙：如果乙也是说谎人，诚实人只能是丙，那恰好有一个诚实人，乙的话就成真的了，矛盾。所以乙是诚实人。\n乙说恰好有一个诚实人，这个人就是乙自己，所以丙是说谎人。"}, {"th": "谁在说谎", "t": "两个路人", "lv": "入门", "ctx": "你在问路，遇到两个人：甲和乙。每人要么是诚实人（只说真话），要么是说谎人（只说假话）。", "rule": "", "lines": [["甲", "我们俩里至少有一个是说谎人。"]], "q": "乙是什么人？", "opts": ["诚实人", "说谎人", "无法确定"], "ans": 1, "why": "如果甲是说谎人，他的话就是假的，意思是“两个人都是诚实人”，可甲自己是说谎人，矛盾。\n所以甲是诚实人，他的话为真：两人里至少有一个说谎人。甲不是，那就是乙。"}, {"th": "谁在说谎", "t": "谁弄坏了展示机", "lv": "进阶", "ctx": "店里的展示手机被摔坏了。当时在柜台附近的四个人说了下面的话。", "rule": "四句话里只有一句是真的。", "lines": [["小陈", "是阿明弄的。"], ["阿明", "小陈在乱说。"], ["阿芳", "是小陈弄的。"], ["顾客", "反正不是我。"]], "q": "是谁弄坏的？", "opts": ["小陈", "阿芳", "阿明", "顾客"], "ans": 3, "why": "小陈说“是阿明”，阿明说“小陈在乱说”，这两句一真一假，唯一的真话就在它们中间。\n所以阿芳和顾客说的都是假话。顾客说“不是我”是假的，那就是顾客弄坏的。\n验证：小陈说是阿明，假；阿明说小陈乱说，真；阿芳说是小陈，假；顾客说不是我，假。正好一句真话。"}, {"th": "谁在说谎", "t": "谁拿了充电宝", "lv": "挑战", "ctx": "聚会结束后，大家发现有人顺手拿走了店里的充电宝。三个朋友这样说。", "rule": "拿了充电宝的人说的是假话，没拿的人说的都是真话。只有一个人拿了。", "lines": [["阿杰", "是小林拿的。"], ["小林", "不是我，也不是大伟。"], ["大伟", "阿杰没拿。"]], "q": "充电宝是谁拿的？", "opts": ["阿杰", "小林", "大伟"], "ans": 1, "why": "规则是：没拿的人说真话，拿了的人说假话。逐个假设：\n假设阿杰拿了：那大伟没拿，大伟说“阿杰没拿”应该是真话，可实际是阿杰拿的，矛盾。\n假设大伟拿了：阿杰没拿，他说“是小林拿的”应该是真话，可实际是大伟，矛盾。\n所以是小林拿的。验证：阿杰说是小林，真；小林说不是自己，假（拿的人说假话）；大伟说阿杰没拿，真。全部对得上。"}];
+
+/* ================= 逻辑 · 趣味玩法：狼人杀推理、谁在说谎、海龟汤 ================= */
+const SOUP=[
+ {th:"海龟汤",t:"一杯水",tag:"经典",face:"一个男人走进酒吧，向酒保要一杯水。酒保突然掏出一把枪对准他。男人说了声“谢谢”，转身走了。",
+  bottom:"男人一直在打嗝，想喝水止嗝。酒保看出来了，故意用枪吓他一跳。男人被吓了一下，嗝停了，水也不用喝了，所以道谢离开。",
+  hints:["男人要水，其实不是因为渴。","他身体有点小状况，喝水能解决。","被吓一跳，也能解决这个问题。"]},
+ {th:"海龟汤",t:"只到七楼",tag:"经典",face:"一个男人住在十二楼。每天早上他坐电梯下楼；晚上回家，他总是坐电梯到七楼，再走楼梯上去。只有下雨天，他会直接坐到十二楼。",
+  bottom:"男人个子很矮，晚上回家只够得着电梯里七楼的按钮。下雨天他带着雨伞，可以用伞尖按到十二楼的按钮。",
+  hints:["和他的身体有关。","问题出在电梯里的按钮上。","雨天他手里多了一样东西。"]},
+ {th:"海龟汤",t:"推车到旅馆",tag:"经典",face:"一个男人推着车走到一家旅馆门口，马上就知道自己破产了。",
+  bottom:"他们在玩大富翁游戏。他的棋子（一辆小车）走到了别人盖了旅馆的格子，要付一大笔过路费，他付不起，就破产了。",
+  hints:["这件事发生在室内，大家都很开心。","“旅馆”和“车”都很小。","这是一种桌游。"]},
+ {th:"海龟汤",t:"天天砸手机",tag:"生意",face:"市场里有个老板，每天早上都当着很多人的面，用锤子砸一部手机。可他的生意越来越好。",
+  bottom:"他卖的是手机钢化膜和防摔壳。他砸的是贴了自家膜、装了自家壳的展示机，屏幕一点没坏。大家亲眼看到效果，就都来他店里买。",
+  hints:["他砸手机是故意的，而且早有准备。","手机其实没坏。","他卖的不是手机本身。"]},
+ {th:"海龟汤",t:"坐反方向的车",tag:"生活",face:"一个男人每天下班，都先坐上开往反方向的公交车，可他说这样回家反而更快。",
+  bottom:"他公司门口那站在线路中间，下班高峰车到的时候早就挤满了，常常连等好几趟都上不去。他先坐反方向两站，到起点站再上车，一定能上车，算下来比原地干等快。",
+  hints:["和下班高峰有关。","他在原来的车站经常遇到一个麻烦。","起点站和中间站有什么不同？"]},
+ {th:"海龟汤",t:"听不懂西语",tag:"生意",face:"一个在利马开店的中国老板，西班牙语说得很好，可遇到某些顾客时，他总假装一句也听不懂。他说这样能多赚钱。",
+  bottom:"有些顾客以为他听不懂，就当着他的面用西语商量：“这个我们最多出到多少钱”“他们家比隔壁便宜”。他假装听不懂，就能听到对方真正的心理价位，砍价时心里有底。",
+  hints:["他想听到一些顾客平时不会对他说的话。","顾客们之间会互相说话。","和砍价有关。"]},
+ {th:"海龟汤",t:"一盒巧克力",tag:"恋爱",face:"情人节那天，一个女生送了男生一盒巧克力。男生高兴地吃完了，可后来他越想越难过。",
+  bottom:"巧克力盒子里有一张卡片，男生吃完才看到，上面写着：“麻烦帮我转交给你室友，谢谢！”他把要转交的巧克力自己吃光了，也明白女生喜欢的不是他。",
+  hints:["巧克力本身没有问题。","盒子里还有别的东西，他一开始没注意。","这盒巧克力本来不是给他的。"]},
+ {th:"海龟汤",t:"狗瘦了",tag:"家人",face:"他在国外工作，妈妈在电话里随口说了句“家里的狗最近瘦了”，他当天就订了回国的机票。",
+  bottom:"家里的狗一直是爸爸在喂，爸爸最宠它，狗一向很胖。狗瘦了，说明爸爸已经好一阵没喂它了。他一问才知道，爸爸生病住院了，妈妈怕他担心一直没说。",
+  hints:["狗瘦了只是一个信号。","平时是谁在照顾这只狗？","妈妈没有把最重要的事说出来。"]},
+ {th:"海龟汤",t:"一面镜子",tag:"生意",face:"一家小店在门口对面的墙上装了一面大镜子。从那以后，店里丢东西的情况少了很多。",
+  bottom:"镜子正好照到店里最里面的货架，那里原来是店员看不到的死角。装了镜子，站在柜台的人能从镜子里看到那个角落，想顺手拿东西的人也看到自己被照着，就不敢了。",
+  hints:["镜子不是用来照顾客的脸的。","店里有一个地方原来看不见。","镜子让两种人都看到了一些东西。"]},
+ {th:"海龟汤",t:"迟到的约会",tag:"恋爱",face:"他第一次约女生吃饭，故意迟到了十分钟。女生不但没生气，后来还答应做他女朋友。",
+  bottom:"他提前到了餐厅，发现女生比他还早到，正对着手机补妆、有点紧张。他不想让她尴尬，就在门外等了十分钟，等她弄好再进去，还说“不好意思我来晚了”。后来女生知道了真相，觉得他很体贴。",
+  hints:["他其实早就到了。","他看到了女生不想被人看到的样子。","迟到是为了照顾对方。"]}];
+TH.wolf=["狼人杀"];TH.liar=["店里","朋友之间","室友","约会","陌生人"];TH.soup=["生活","生意","恋爱","经典风格","脑洞"];
+Object.assign(JOB_NAME,{wolf:"狼人杀推理题",liar:"说谎者谜题",soup:"海龟汤"});
+Object.assign(JOB_VIEW,{wolf:["think","logic","wolf"],liar:["think","logic","liar"],soup:["think","logic","soup"]});
+const LOGIC_MODES={find:"逻辑找茬",wolf:"狼人杀",liar:"谁在说谎",soup:"海龟汤"};
+const logicMode=()=>LOGIC_MODES[store.get("lgf-logic-mode","find")]?store.get("lgf-logic-mode","find"):"find";
+const PZ_GEN={
+ wolf:(th,avoid)=>`出一道“狼人杀推理”题，用文字推理就能做，不需要真的玩游戏。
+固定规则：本局只有 1 个狼人和 1 个真预言家；好人（包括预言家）说的话一定是真的；狼人可以说真话也可以说假话；好人不会冒充预言家。可以加一条额外信息，比如“昨晚某人被狼人杀了，狼人不会杀自己”，或者“女巫已亮明身份”。
+给 5 到 6 个玩家（1号、2号……），每人说一句话。必须有、而且只有一个玩家可能是狼人。
+出完后你要自己逐个假设“如果 X 号是狼人”，检查所有好人的话是否都成立、预言家是否只有一个，确保只有一个假设不矛盾。难度：${rnd(["入门","进阶","挑战"])}。不要和这些重复：${avoid||"无"}。
+只回复JSON：{"t":"4-6字标题","lv":"入门/进阶/挑战","rules":"额外信息，没有就写空字符串","lines":[["1号","发言"],["2号","发言"]],"q":"谁是狼人？","opts":["1号","2号","3号","4号","5号"],"ans":正确选项的序号（从0开始）,"why":"完整推理过程，分几步写，用换行分开，最后一步写“验证”"}`,
+ liar:(th,avoid)=>`出一道“谁在说谎”逻辑推理题，场景：${th}。${ME}
+形式二选一：①有人做了某件事，3 到 4 个人各说一句话，并给出条件（比如“只有一句是真话”“只有一个人说了假话”“做了的人说假话，没做的人说真话”），问是谁；②诚实人（只说真话）和说谎人（只说假话）题，问某人是什么人。
+必须只有唯一答案。出完后你要自己把每个选项都假设一遍，逐句检查真假，确保只有一个答案符合条件。不要和这些重复：${avoid||"无"}。
+只回复JSON：{"t":"4-6字标题","lv":"入门/进阶/挑战","ctx":"背景，一两句话","rule":"条件","lines":[["人名","说的话"]],"q":"问题","opts":["选项"],"ans":正确选项的序号（从0开始）,"why":"完整推理过程，分步，用换行分开，最后写验证"}`,
+ soup:(th,avoid)=>`出一道原创“海龟汤”（情境推理谜题），风格：${th}。${ME}
+要求：清汤——不涉及死亡、暴力、恐怖、色情、自残；轻松有趣、贴近生活。汤面一到两句话，听起来很反常；汤底要把汤面里所有反常的地方都解释清楚，合情合理，让人有“原来如此”的感觉，不靠超自然、巧合或冷门知识。hints 写三条提示，从模糊到具体，不要直接说出答案。不要和这些重复：${avoid||"无"}。
+只回复JSON：{"t":"4-6字标题","tag":"生活/生意/恋爱/脑洞","face":"汤面","bottom":"汤底","hints":["提示1","提示2","提示3"]}`};
+const PZ_CHECK={
+ wolf:r=>r&&Array.isArray(r.lines)&&r.lines.length>=4&&Array.isArray(r.opts)&&r.opts.length>=3&&Number.isInteger(+r.ans)&&+r.ans>=0&&+r.ans<r.opts.length&&r.why,
+ liar:r=>r&&Array.isArray(r.lines)&&r.lines.length>=1&&Array.isArray(r.opts)&&r.opts.length>=2&&Number.isInteger(+r.ans)&&+r.ans>=0&&+r.ans<r.opts.length&&r.why,
+ soup:r=>r&&r.face&&r.bottom&&r.t};
+const PZ_POOL={wolf:WOLF,liar:LIAR,soup:SOUP};
+const PZ_INTRO={
+ find:"",
+ wolf:"规则：本局只有 1 个狼人、1 个真预言家。好人说的话都是真的，狼人可能说谎。从发言里找出矛盾，揪出狼人。",
+ liar:"从几个人的话里找矛盾。小技巧：先找两句“正好相反”的话，它们一定一真一假。",
+ soup:"读汤面，然后问能用“是 / 不是”回答的问题，一步步还原真相。问得越少越厉害。"};
+function logicModesHTML(m){return `<div class="chips lmode" id="lmode">${Object.entries(LOGIC_MODES).map(([k,n])=>`<button data-m="${k}" class="${k===m?"on":""}">${n}</button>`).join("")}</div>${PZ_INTRO[m]?`<p class="hint">${PZ_INTRO[m]}</p>`:""}`}
+function bindLogicModes(){document.querySelectorAll("#lmode button").forEach(b=>b.onclick=()=>{store.set("lgf-logic-mode",b.dataset.m);thLogic()})}
+function pzNext(k,rerender){return async()=>{const n=await nextItem({k,theme:"随机",pool:PZ_POOL[k],prompt:PZ_GEN[k],check:PZ_CHECK[k],btn:$("#nx"),box:$("#gbox")});
+  if(n){if(k==="soup")store.set("lgf-soup",null);if(location.hash.startsWith("#think")&&sub.think==="logic"&&logicMode()===k)rerender()}}}
+/* 狼人杀 / 谁在说谎：选择题 */
+function thPuzzle(k){const it=curItem(k,PZ_POOL[k]),body=$("#body"),wolf=k==="wolf";
+  const lines=(it.lines||[]).map(([who,txt])=>`<div class="pzl${wolf?" wf":""}"><span class="pzw">${esc(who)}</span><span class="pzt">${esc(txt)}</span></div>`).join("");
+  body.innerHTML=`${logicModesHTML(k)}${genbar(k)}${errNote(it)}
+   <div class="card m-think pzcard"><div class="row" style="justify-content:space-between;align-items:center"><h2>${esc(it.t)}</h2><span class="row" style="gap:6px">${it.lv?`<span class="tag">${esc(it.lv)}</span>`:""}${srcTag(it)}</span></div>
+    ${it.ctx?`<p class="note">${esc(it.ctx)}</p>`:""}${it.rules?`<p class="note pzinfo">📌 ${esc(it.rules)}</p>`:""}${it.rule?`<p class="note pzinfo">📌 ${esc(it.rule)}</p>`:""}
+    <div class="pzlines">${lines}</div><p class="note"><b>${esc(it.q||"谁是狼人？")}</b></p></div>
+   <div class="opts ${wolf?"pzseats":""}">${(wolf?it.opts.map((o,i)=>i).sort((x,y)=>(parseInt(it.opts[x])||0)-(parseInt(it.opts[y])||0)):it.opts.map((o,i)=>i)).map((i,n)=>`<button class="opt" data-i="${i}">${wolf?`<span class="seat">${esc(it.opts[i])}</span>`:`<span class="k">${"ABCDEFG"[n]}</span>${esc(it.opts[i])}`}</button>`).join("")}</div>
+   <div id="ex"></div><button class="btn ghost" id="nx2">下一题</button>
+   <p class="hint">${apiHint()}</p>`;
+  bindLogicModes();bindGen(pzNext(k,()=>thPuzzle(k)));
+  body.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{const i=+b.dataset.i,ans=+it.ans,ok=i===ans;
+    body.querySelectorAll(".opt").forEach(x=>{const j=+x.dataset.i;x.disabled=true;x.classList.add(j===ans?"good":j===i?"bad":"dim2")});
+    $("#ex").innerHTML=`<div class="card m-think"><h2>${ok?(wolf?"抓到狼了 🐺 ✓":"答对了 ✓"):"答案是 "+esc(it.opts[ans])}</h2><p class="lbl">推理过程</p><div class="pzwhy">${String(it.why||"").split(/\n+/).filter(Boolean).map(x=>`<p>${esc(x)}</p>`).join("")}</div></div>`;
+    addScore("logic",ok?100:0);logEvent("logic",{ok,kind:k,th:LOGIC_MODES[k],q:it.t,score:ok?100:0});if(today().think==null)mark("think","logic");gainXP("think",ok?3:1)})}
+/* 海龟汤：和 AI 主持人问答 */
+const soupSt=it=>{let s=store.get("lgf-soup",null);if(!s||s.t!==it.t){s={t:it.t,qa:[],hint:0,done:false,give:false};store.set("lgf-soup",s)}return s};
+let SOUP_BUSY=null;
+function thSoup(){const it=curItem("soup",SOUP),body=$("#body"),st=soupSt(it),ai=apiReady(),end=st.done||st.give;
+  const badge=a=>{const c=/^是$/.test(a)?"y":/^不是$/.test(a)?"n":/无关/.test(a)?"x":"m";return `<span class="sa ${c}">${esc(a)}</span>`};
+  const qa=st.qa.map(x=>x.g?`<div class="sq g"><span class="sqq">我猜：${esc(x.q)}</span><span class="sv">${esc(x.v)}${x.hit!=null?` · ${x.hit}%`:""}</span>${x.miss?`<span class="hint">${esc(x.miss)}</span>`:""}</div>`
+    :`<div class="sq"><span class="sqq">${esc(x.q)}</span>${badge(x.a)}${x.key?`<span class="skey">关键！</span>`:""}</div>`).join("");
+  const nq=st.qa.filter(x=>!x.g).length;
+  body.innerHTML=`${logicModesHTML("soup")}${genbar("soup","碗")}${errNote(it)}
+   <div class="card m-think soupc"><div class="row" style="justify-content:space-between;align-items:center"><h2>🐢 ${esc(it.t)}</h2><span class="row" style="gap:6px">${it.tag?`<span class="tag">${esc(it.tag)}</span>`:""}${srcTag(it)}</span></div>
+    <p class="lbl">汤面</p><p class="essay">${esc(it.face)}</p></div>
+   ${st.hint?`<div class="card">${it.hints.slice(0,st.hint).map((h,i)=>`<p class="note">💡 提示 ${i+1}：${esc(h)}</p>`).join("")}</div>`:""}
+   ${qa?`<div class="card soupqa"><p class="lbl">已问 ${nq} 个问题</p>${qa}</div>`:""}
+   ${end?`<div class="card m-think soupend"><h2>${st.done?"真相大白 🎉":"汤底"}</h2><p class="essay">${esc(it.bottom)}</p>${st.done?`<p class="note">你用了 ${nq} 个问题${st.hint?`、${st.hint} 条提示`:""}还原了真相。</p>`:""}</div>`
+    :ai?`<label class="lbl" for="sq">问一个能用“是 / 不是”回答的问题</label><textarea id="sq" rows="2" placeholder="比如：他是故意的吗？这件事和钱有关吗？"></textarea>
+      <div class="row"><button class="btn" id="sask" ${SOUP_BUSY?"disabled":""}>${SOUP_BUSY?"主持人在想…":"提问"}</button><button class="btn ghost" id="sguess" ${SOUP_BUSY?"disabled":""}>我猜到了</button></div>`
+    :`<p class="note">没有接入 AI 时，没人回答你的问题。可以先自己想，卡住了就看提示，想好了再揭晓汤底。接入 AI 后，AI 会当主持人回答你的问题。</p>`}
+   ${end?"":`<div class="row"><button class="btn ghost" id="shint" ${st.hint>=it.hints.length?"disabled":""}>要个提示（${st.hint}/${(it.hints||[]).length}）</button><button class="btn ghost" id="sgive">看汤底</button></div>`}
+   <button class="btn ghost" id="nx2">再来一碗</button><p class="hint">${apiHint()}</p>`;
+  bindLogicModes();bindGen(pzNext("soup",thSoup));
+  const save=()=>store.set("lgf-soup",st);
+  if($("#shint"))$("#shint").onclick=()=>{st.hint=Math.min((it.hints||[]).length,st.hint+1);save();thSoup()};
+  if($("#sgive"))$("#sgive").onclick=b=>{const x=$("#sgive");if(x.dataset.sure!=="1"){x.dataset.sure="1";x.textContent="确定揭晓？";return}
+    st.give=true;save();logEvent("logic",{kind:"soup",ok:false,q:it.t,score:0});thSoup()};
+  const host=`你是“海龟汤”游戏的主持人。\n汤面：${it.face}\n汤底（只有你知道，绝对不能直接说出来）：${it.bottom}\n`;
+  const run=(fn)=>{SOUP_BUSY=fn().catch(e=>{toast("主持人没连上："+errText(e))}).finally(()=>{SOUP_BUSY=null;if(location.hash.startsWith("#think")&&sub.think==="logic"&&logicMode()==="soup")thSoup()});thSoup()};
+  if($("#sask"))$("#sask").onclick=()=>{const q=$("#sq").value.trim();if(!q)return $("#sq").focus();
+    run(async()=>{const r=await askJSON(host+`玩家刚问：「${q}」\n严格按汤底判断，只能从这几种里选一个回答：是 / 不是 / 无关 / 是也不是。玩家问的不是是非题（比如“为什么”“是谁”），就回答“请问是非题”。如果这个问题已经问到了汤底的关键点，key 设为 true。\n只回复JSON：{"a":"是","key":false}`,null,.1,{model:genModel()});
+      const a=String(r.a||"无关").trim();st.qa.push({q,a,key:!!r.key});save()})};
+  if($("#sguess"))$("#sguess").onclick=()=>{const g=$("#sq").value.trim();if(!g){$("#sq").focus();toast("先在框里写下你猜的真相");return}
+    run(async()=>{const r=await askJSON(host+`玩家说出了他猜的真相：「${g}」\n判断他有没有还原汤底的核心（关键的原因和经过），细节不用完全一样。hit 是 0 到 100 的还原程度。miss 用一句话说还差哪一块，不能剧透具体答案；猜中了就写空字符串。\n只回复JSON：{"hit":80,"verdict":"猜中了/很接近了/方向对了/还差得远","miss":""}`,null,.1,{model:genModel()});
+      const hit=Math.max(0,Math.min(100,+r.hit||0));st.qa.push({g:1,q:g,v:r.verdict||(hit>=75?"猜中了":"还差一点"),hit,miss:hit>=75?"":r.miss||""});
+      if(hit>=75){st.done=true;const n=st.qa.filter(x=>!x.g).length,sc=Math.max(40,Math.min(100,110-n*5-st.hint*10));
+        addScore("logic",sc);logEvent("logic",{kind:"soup",ok:true,q:it.t,score:sc,n});if(today().think==null)mark("think","logic");gainXP("think",5);buzz([10,40,10])}
+      save()})}}
+
+/* ================= 恋爱交友内容（24岁单身，想认识女生） ================= */
+E("心动女生","咖啡店的 Lucía","第一次搭话","你常去店附近一家咖啡店，店员 Lucía 每次都对你笑。今天结账时她先开口了。","你每天都来诶，是在附近上班吗？","好奇，愿意聊几句","在给你一个自然开口的机会",
+ "顺着聊开","对，我在前面市场开店，你家咖啡是我每天的开机键😄 你在这儿做多久了？","回答+一点幽默+把问题抛回给她",
+ "留个钩子","被你发现了，我是这儿的常客。哪天你推荐一款你最喜欢的，我照着点","给下次见面留个由头，不急着要联系方式");
+E("心动女生","刚加微信的女生","只回“哈哈”","朋友聚会上加了一个女生的微信，你发了几句，她只回了两个字。","哈哈","可能没想好怎么接，也可能兴趣一般","在看你接下来会不会让聊天变有意思",
+ "换个好接的话题","哈哈，对了上次听你说想去马丘比丘，定好时间了吗？","抛一个她自己提过、好回答的话题",
+ "轻松收尾","不打扰你啦，下次聚会见～","不纠缠，留个好印象，比硬聊强");
+E("心动女生","朋友介绍的女生","夸你","朋友介绍你们认识，第一次聊天，她听说你自己在开店。","听说你自己开店？好厉害呀","客气，也有点好奇","想多了解你，也在看你是不是爱吹的人",
+ "谦虚+有料","哪里，就是个小店，每天和货、和顾客打交道，倒是练出了一口西语😂 你呢，平时做什么？","不吹也不过分谦虚，再把话题交给她",
+ "讲个小故事","厉害谈不上，刚开始连 “¿cuánto cuesta?” 都说不利索，被顾客笑了好几次","一个有画面的糗事，比讲成绩更拉近距离");
+E("心动女生","喜欢的女生","她心情不好","你喜欢的女生晚上发来消息。","今天被老板骂了，好烦","委屈、需要发泄","想有人站在她这边，不是想听你分析谁对谁错",
+ "先站她这边","啊这么过分，被说了肯定憋屈。怎么回事，跟我说说？","先共情，再让她多说",
+ "陪伴+小行动","抱抱。要不要我请你吃个冰淇淋，边吃边吐槽他😤","给情绪一个出口，也顺便多一次见面");
+E("约会","约会对象","邀约被拒","你第一次约她周六出来吃饭。","这周六我有事诶","可能真有事，也可能还不确定","在看你会不会继续，也在看你会不会让她有压力",
+ "给台阶再约","没事～那你下周哪天方便？我知道一家秘鲁菜挺好吃","不追问原因，直接给出下一个选择",
+ "降低门槛","好呀，那改天有空喝杯咖啡也行，不用一整晚","把约会变轻，她更容易答应");
+E("约会","约会对象","约会后","第一次约会结束，你送她上车后，她发来消息。","今天玩得挺开心的，谢谢你请客～","开心，在表达好感","想知道你是不是也开心，期待下一次",
+ "回应+期待下次","我也很开心！下次换你带路，你说的那家甜品店我记着呢😄","呼应约会里聊过的细节，自然约下一次",
+ "真诚一句","到家说一声。今天和你聊天真的很舒服","简单真诚，让她安心也知道你在意");
+E("约会","暧昧中的女生","试探","聊了一阵子，她半开玩笑地问你。","你是不是对每个女生都这么好？","试探，想确认自己特不特别","想听到你对她是不一样的",
+ "直接表态","不是，我对你比较上心，你应该感觉得到吧😄","大方承认，比绕弯子更有安全感",
+ "幽默一点","哪有，我对顾客都是讨价还价的态度，对你是认真的","用玩笑带出真心，不尴尬");
+E("约会","秘鲁女生 Valeria","文化差异","你和秘鲁女生 Valeria 聊天，她笑着用西语说了一句。","¿Y en China todos los chicos son tan tímidos como tú? 😂","调侃，带点好感","在逗你，想看你放不放得开",
+ "接梗自黑","Solo al principio… después no me callo 😂（只是刚开始害羞，熟了就停不下来）","顺着玩笑承认，再反转一下",
+ "反问她","Depende de con quién hablemos. Contigo un poco, porque me pones nervioso 😅（看跟谁聊，跟你会有点紧张）","把“害羞”变成一种夸奖");
+E("朋友","朋友 阿杰","催找对象","朋友在群里调侃你。","你都24了还不找女朋友，眼光太高了吧","开玩笑，也是关心","想看你的反应，顺便八卦",
+ "自嘲接住","哪敢高啊，是还没遇到愿意听我讲进货价的😂 有合适的给我介绍啊","不防御，还顺手请朋友帮忙",
+ "认真一句","不急，想找个聊得来的。真有合适的你记得想着我","大方说出自己的想法，朋友更愿意帮你");
+E("家人","妈妈","催婚","妈妈在视频里说起你的终身大事。","你也不小了，什么时候带个女朋友回来给我们看看","着急、担心你一个人","想知道你有在考虑，不是想吵架",
+ "让她安心","妈我知道，我也在留意，有好消息第一个告诉您😄","承认在意，给她一个盼头",
+ "说说近况","在认识新朋友呢，不过想找个真合适的。您和爸别太操心，身体好最重要","让她知道你有打算，再把关心还给她");
+T("心动女生","你约的女生迟到了十五分钟。","不好意思，路上堵车，等很久了吧？","嗯，等了好久","实话也要看时机，一句抱怨就让刚开始的约会变尴尬。","没事，我也刚到","不急，正好看了会儿风景","没关系，安全到就好");
+T("心动女生","女生发来新发型的自拍。","我新剪的头发，怎么样？","还行吧，之前的也挺好","“还行吧”加“之前也好”，听起来就是不喜欢。","好看，显得很精神","短发很适合你","很好看，比之前更有气质");
+T("约会对象","聊天时她说起自己的爱好。","我最近在学跳舞，不过跳得很烂哈哈","学那个有什么用","否定她喜欢的东西，等于否定她这个人。","什么舞？有视频吗","好酷，学多久了","能坚持去学就很厉害了");
+D("恋爱交友","要不要表白","你认识一个女生两个月，常聊天，单独见过三次。她回消息挺积极，但从没主动约过你。朋友劝你赶紧表白。","现在表白吗？","表白不是开始，而是确认：没确认她的心意前，先多制造单独相处的机会","她不主动约，可能是性格，也可能只把你当朋友，要看她对邀约的反应",
+ "先升温再确认","再约两三次，挑能聊深一点的场合，观察她是不是也在投入","用行动探路，比一句话赌输赢稳",
+ "温和试探","找个轻松的时候说“我挺喜欢和你待在一起的”，看她怎么接","留了余地，她也不会有压力");
+D("恋爱交友","第一次约会去哪","第一次单独约一个女生，你这个月手头不宽裕。她说“随便，你定”。","约在哪、怎么安排？","第一次约会的目的是聊得开心、让她觉得舒服，不是花多少钱","“随便”其实是把选择权给你，最怕的是你也没主意",
+ "给两个选项","发她两个具体的地方让她选，比如一家小咖啡馆和海边散步","既显得有准备，又尊重她的想法",
+ "短而精","约个下午喝咖啡，一两个小时就好，聊得好再顺路去走走","时间短压力小，结束在聊得正开心的时候");
+SP("恋爱交友","在利马认识合适的女生","单身，想在利马认识合适的女生，可以从哪些方向入手？","可以按“已有圈子、兴趣活动、线上、日常生活”四个方向拆","最容易忽略的是先把自己的状态和生活圈打理好，再说认识人",
+ "四个方向","1 已有圈子：让朋友、同学介绍，参加朋友聚会\n2 兴趣活动：健身房、舞蹈课、语言交换、徒步团\n3 线上：交友软件、华人群，注意安全和真实\n4 日常生活：常去的咖啡店、店里的邻居和熟客","先从成本最低、信任最高的已有圈子开始");
+DT("恋爱交友","她突然冷淡了","你和一个女生聊得挺好，可最近一周她回消息越来越慢，话也少了。","你可以看聊天记录、问共同的朋友、回想最近的约会。","上次约会你一直在看手机回顾客消息，她觉得自己不被重视",["手机","顾客","不被重视","回消息","分心"],
+ ["上次约会时你接了好几个顾客的电话、一直在回消息","她那天中途说过“你好忙啊”","共同的朋友说她最近工作正常，没什么事","她朋友圈还是照常在发","约会前她特意打扮过"]);
+WL("A2","约会交友",[["la cita","约会","Tengo una cita el sábado.","我周六有个约会。"],["invitar","请客、邀请","Te quiero invitar a un café.","我想请你喝杯咖啡。"],["guapa","漂亮","Hoy estás muy guapa.","你今天很漂亮。"],["simpática","（女生）亲切、讨人喜欢","Eres muy simpática.","你人真好。"],["el número","电话号码","¿Me pasas tu número?","能给我你的号码吗？"],["me gustas","我喜欢你","Creo que me gustas.","我觉得我喜欢你。"],["quedamos","我们约好（见面）","Entonces quedamos a las siete.","那我们七点见。"],["el plan","安排","¿Tienes algún plan para el sábado?","你周六有什么安排吗？"]]);
+WL("B1","约会交友",[["química","（两人之间的）感觉","Creo que entre nosotros hay química.","我觉得我们之间有感觉。"],["coquetear","撩、调情","No sé coquetear, soy muy tímido.","我不会撩，我很害羞。"],["tímido","害羞","Al principio soy un poco tímido.","刚开始我有点害羞。"],["la pareja","对象、伴侣","¿Tienes pareja?","你有对象吗？"],["soltero","单身（男）","Todavía estoy soltero.","我还单身。"],["me caes bien","我挺喜欢你这个人","La verdad, me caes bien.","说真的，我挺喜欢你这个人的。"],["en serio","认真的","Quiero algo en serio, no solo pasar el rato.","我想认真谈，不只是玩玩。"],["roche","（秘鲁）尴尬、丢脸","¡Qué roche! Me olvidé de su nombre.","太尴尬了！我忘了她的名字。"]]);
+TR("约会交友","这周六你有空吗？我想请你吃饭。","¿Estás libre este sábado? Me gustaría invitarte a cenar.");
+TR("约会交友","和你聊天很开心，下次再见吧。","Me encantó conversar contigo. ¡Nos vemos la próxima!");
+TR("约会交友","你喜欢吃什么？我知道一家很好吃的秘鲁菜馆。","¿Qué te gusta comer? Conozco un restaurante peruano muy rico.");
+RP("约会交友","约女生喝咖啡","你在朋友聚会上认识了一个秘鲁女生，想约她改天喝咖啡。","自然地聊几句，要到联系方式并约好时间","una chica peruana simpática que conociste en una reunión de amigos, algo tímida al principio","Hola… ¿tú eres el amigo de Carlos, no?");
+
 /* ================= ROUTER ================= */
 /* ================= 成长：修炼线、等级、成就、反馈 ================= */
 const TRACKS={eq:{n:"接话",g:"话",m:"eq"},es:{n:"西语",g:"西",m:"es"},think:{n:"思维",g:"思",m:"think"},know:{n:"知识",g:"知",m:"know"}};
@@ -3188,7 +3370,7 @@ function route(){
   VIEWS[view](arg);window.scrollTo(0,0)}
 app.addEventListener("animationend",e=>{if(e.target.parentElement===app)app.classList.remove("enter")});
 /* ================= App 外壳：安装、离线、云同步 ================= */
-const APP_VER="2026.11.16";
+const APP_VER="2026.11.17";
 const IS_WEB=location.protocol==="https:"||location.hostname==="localhost"||location.hostname==="127.0.0.1";
 const IS_APP=(()=>{try{return matchMedia("(display-mode: standalone)").matches||navigator.standalone===true}catch(e){return false}})();
 let INSTALL_EVT=null;
